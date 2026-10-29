@@ -1,0 +1,573 @@
+/* ==========================================================================
+   TEST APP — Equals.com Editorial Reference + Impeccable Audited System
+   Typography: Newsreader (Display) + Public Sans (UI) + IBM Plex Mono (Data)
+   ========================================================================== */
+
+:root {
+  --ink-black: #0F172A;
+  --ink-body: #334155;
+  --ink-muted: #475569;
+  --surface-white: #FFFFFF;
+  --surface-warm: #F4F3EF;
+  --border-subtle: #E2E8F0;
+  --border-dark: #0F172A;
+
+  /* Editorial & Equals Reference Palette */
+  --hero-tint-top: #F2E8E5;
+  --hero-tint-mid: #F9F4F2;
+  --block-cyan: #2AD4E8;
+  --block-mint: #7AE5B8;
+  --block-yellow: #FAF078;
+  --card-coral: #F87B7B;
+  --card-amber: #F5C469;
+  --card-sand: #EDE5D8;
+  --card-sky: #ADEFF9;
+  --cta-emerald: #1FD178;
+  --announce-orange: #FF5C35;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--block-yellow);
+  color: var(--ink-black);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink-black);
+  outline-offset: 2px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--surface-white);
+  color: var(--ink-black);
+  font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: 'Newsreader', Georgia, serif;
+  letter-spacing: -0.025em;
+}
+
+.font-mono-num {
+  font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   1. Top Announcement Bar (Subtle Editorial Text Animation) & Responsive Navbar
+   -------------------------------------------------------------------------- */
+.top-announce-bar {
+  background-color: var(--announce-orange);
+  color: #FFFFFF;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  overflow: hidden;
+}
+
+.announce-text-stage {
+  display: inline-block;
+  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.announce-text-stage.is-changing {
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announce-text-stage { transition: none; }
+}
+
+.navbar-glass {
+  background-color: rgba(242, 232, 229, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 0 1rem;
+  transition: background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.navbar-glass.scrolled {
+  background-color: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 4px 20px -6px rgba(15, 23, 42, 0.06);
+}
+
+/* Products Sub-Menu Dropdown */
+.nav-dropdown-wrapper {
+  position: relative;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px) scale(0.98);
+  width: 580px;
+  max-width: 92vw;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.14), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 180ms;
+  z-index: 60;
+}
+
+.nav-dropdown-wrapper:hover .nav-dropdown-menu,
+.nav-dropdown-wrapper.open .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.submenu-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem;
+  border-radius: 8px;
+  text-align: left;
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 140ms ease, transform 140ms ease;
+}
+
+.submenu-item:hover {
+  background-color: #F8FAFC;
+  transform: translateX(3px);
+}
+
+.submenu-icon {
+  width: 38px;
+  height: 38px;
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* User Account & Quota Popover Menu (Top Right Header) */
+.user-account-wrapper {
+  position: relative;
+}
+
+.user-account-menu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  width: 290px;
+  max-width: 92vw;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.14), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(8px) scale(0.98);
+  transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 180ms;
+  z-index: 65;
+}
+
+.user-account-wrapper.open .user-account-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* Mobile Drawer Menu */
+.mobile-nav-drawer {
+  display: none;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1rem 1.25rem;
+}
+
+.mobile-nav-drawer.open {
+  display: block;
+  animation: paneSlideFade 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --------------------------------------------------------------------------
+   2. Page Level Switching: Landing View vs Dedicated Interactive Studio View
+   -------------------------------------------------------------------------- */
+.page-view {
+  display: none;
+}
+
+.page-view.active {
+  display: block;
+  animation: paneSlideFade 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --------------------------------------------------------------------------
+   3. Hero Section & Scroll-Triggered Motion Graphic Window
+   -------------------------------------------------------------------------- */
+.hero-editorial-section {
+  background: linear-gradient(180deg, var(--hero-tint-top) 0%, var(--hero-tint-mid) 62%, #FFFFFF 100%);
+  position: relative;
+  padding: 2.75rem 1rem 4rem;
+}
+
+@media (min-width: 640px) {
+  .hero-editorial-section {
+    padding: 3.5rem 1.5rem 5rem;
+  }
+}
+
+.underline-sketch {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+.btn-pill-white {
+  background: #FFFFFF;
+  color: var(--ink-black);
+  border: 1px solid rgba(15, 23, 42, 0.16);
+  border-radius: 9999px;
+  padding: 0.7rem 1.35rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  cursor: pointer;
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+}
+
+.btn-pill-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+}
+
+.btn-pill-emerald {
+  background: var(--cta-emerald);
+  color: #052E16;
+  border: 1px solid rgba(5, 46, 22, 0.14);
+  border-radius: 9999px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.btn-pill-emerald:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+/* App Window Frame with Motion Graphic Support */
+.app-window-frame {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  box-shadow: 0 24px 54px -15px rgba(15, 23, 42, 0.14), 0 4px 16px -4px rgba(15, 23, 42, 0.05);
+  padding: 1.25rem;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .app-window-frame {
+    padding: 1.75rem;
+  }
+}
+
+.window-yellow-banner {
+  background-color: #FEF08A;
+  color: #713F12;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Lightweight Motion Graphic Stepper inside Hero Window */
+.motion-step-btn {
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.motion-step-btn.active {
+  background-color: #F8FAFC;
+  border-color: var(--border-subtle);
+}
+
+.motion-bar-track {
+  height: 3px;
+  width: 100%;
+  background-color: #E2E8F0;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+
+.motion-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--ink-black);
+  transition: width 100ms linear;
+}
+
+.motion-step-btn.active .motion-bar-fill {
+  width: 100%;
+  transition: width 2600ms linear;
+}
+
+/* Animated SVG Curve Draw */
+.motion-curve-line {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 420;
+  transition: stroke-dashoffset 900ms cubic-bezier(0.16, 1, 0.3, 1), stroke 400ms ease;
+}
+
+.side-color-stripes {
+  position: absolute;
+  top: 54%;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   4. Dedicated Interactive Studio Page & Redesigned Studio Pill Bar
+   -------------------------------------------------------------------------- */
+.studio-page-section {
+  background-color: var(--surface-warm);
+  min-height: calc(100vh - 64px);
+  padding: 2rem 1rem 4rem;
+}
+
+@media (min-width: 640px) {
+  .studio-page-section {
+    padding: 3rem 1.5rem 5rem;
+  }
+}
+
+/* Redesigned Clean Segmented Studio Pill Bar (Swipeable on Mobile) */
+.studio-pill-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #FFFFFF;
+  padding: 0.4rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+
+.studio-pill-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.studio-pill-btn {
+  border: none;
+  background: transparent;
+  color: var(--ink-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.studio-pill-btn:hover {
+  color: var(--ink-black);
+  background-color: #F8FAFC;
+}
+
+.studio-pill-btn.active {
+  background: var(--ink-black);
+  color: #FFFFFF;
+}
+
+.studio-pane {
+  display: none;
+  animation: paneSlideFade 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.studio-pane.active {
+  display: block;
+}
+
+@keyframes paneSlideFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Connected Product Value Ladder & Split Stages
+   -------------------------------------------------------------------------- */
+.funnel-step-row {
+  transition: background-color 160ms ease;
+}
+
+.funnel-step-row:hover {
+  background-color: #F8FAFC;
+}
+
+.color-stage-cyan {
+  background-color: var(--block-cyan);
+  padding: 2.5rem 1.5rem;
+}
+
+.color-stage-mint {
+  background-color: var(--block-mint);
+  padding: 2.5rem 1.5rem;
+}
+
+.color-stage-yellow {
+  background-color: var(--block-yellow);
+  padding: 2.5rem 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .color-stage-cyan,
+  .color-stage-mint,
+  .color-stage-yellow {
+    padding: 3rem 2rem;
+  }
+}
+
+.floating-icon-tile {
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 0.85rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.12);
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-icon-tile:hover {
+  transform: translateY(-3px);
+}
+
+/* --------------------------------------------------------------------------
+   6. Colorful Testimonial Masonry Grid
+   -------------------------------------------------------------------------- */
+.testi-card {
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--ink-black);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testi-card:hover {
+  transform: translateY(-3px);
+}
+
+.testi-coral { background-color: var(--card-coral); }
+.testi-amber { background-color: var(--card-amber); }
+.testi-sand { background-color: var(--card-sand); }
+.testi-sky { background-color: var(--card-sky); }
+
+/* --------------------------------------------------------------------------
+   7. Blurred Teaser & Sleek Compact Modals (Point 5)
+   -------------------------------------------------------------------------- */
+.redacted-blur {
+  filter: blur(5px);
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.55;
+  transition: filter 350ms ease, opacity 350ms ease;
+}
+
+.redacted-unlocked {
+  filter: blur(0);
+  user-select: auto;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(3px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 80;
+  padding: 1rem;
+}
+
+.modal-backdrop.open {
+  display: flex;
+  animation: paneSlideFade 160ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media print {
+  body * { visibility: hidden; }
+  #ats-cv-printable, #ats-cv-printable * { visibility: visible; }
+  #ats-cv-printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #FFFFFF !important;
+  }
+}

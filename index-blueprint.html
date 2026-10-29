@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="id" class="blueprint-mode">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test App — Career Launchpad &amp; Job-Ready Toolkit</title>
+  <!-- Google Fonts: Space Grotesk (Headers) + JetBrains Mono (Technical Meta) + General Sans (Body via Fontshare CDN) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Technical Minimalist Blueprint Styling -->
+  <link rel="stylesheet" href="css/styles-blueprint.css" />
+</head>
+<body class="blueprint-mode">
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-xs sm:max-w-sm"></div>
+
+  <!-- Floating Prototype Switcher (1-Click UX Switcher) -->
+  <div class="fixed bottom-4 left-4 z-50 flex items-center gap-1 p-1 bg-[#1A3C2B] text-white border border-[#1A3C2B] shadow-md font-mono-tech text-[11px]">
+    <a href="index.html" class="px-2.5 py-1.5 text-[#F7F7F5]/80 hover:text-white hover:bg-white/10 font-semibold transition no-underline">← Tema 1: Editorial</a>
+    <span class="px-2.5 py-1.5 bg-[#9EFFBF] text-[#1A3C2B] font-bold uppercase">Tema 2: Blueprint</span>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 1. TOP ANNOUNCEMENT BAR (Clean, No Theme Switcher Clutter)            -->
+  <!-- ===================================================================== -->
+  <div class="hairline-b bg-[#F7F7F5] px-4 py-2">
+    <div class="max-w-6xl mx-auto flex items-center justify-center">
+      <button onclick="selectProductFromSubMenu('toolkits', 'all')" class="bg-transparent border-0 p-0 cursor-pointer text-center">
+        <span id="announce-rotator-text" class="font-mono-tech text-[11px] text-[#1A3C2B] hover:underline">
+          Baru: Job-Ready Case Kit (Data Analyst &amp; IT GRC ISO 27001) + AI CV Match kini hadir dengan pembayaran QRIS Instan →
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 2. TECHNICAL NAVIGATION (Simplified & Clean)                          -->
+  <!-- ===================================================================== -->
+  <header id="main-navbar" class="tech-navbar sticky top-0 z-50 px-4">
+    <div class="max-w-6xl mx-auto h-16 flex items-center justify-between gap-4">
+
+      <!-- Left Side: Square Logo Box (32x32px) in #1A3C2B with a white icon -->
+      <button onclick="switchMainPage('landing')" class="flex items-center gap-2.5 bg-transparent border-0 cursor-pointer p-0 text-left" title="Kembali ke Halaman Utama">
+        <div class="w-8 h-8 bg-[#1A3C2B] text-white flex items-center justify-center shrink-0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
+        </div>
+        <span class="font-mono-tech text-xs font-bold tracking-wider uppercase text-[#1A3C2B]">Test App</span>
+      </button>
+
+      <!-- Center: Simplified Nav Links (Only Products & Pricing) -->
+      <nav class="hidden md:flex items-center gap-6">
+        <div id="products-dropdown-wrapper" class="nav-dropdown-wrapper">
+          <button onclick="toggleProductsDropdown(event)" class="font-mono-tech text-[10px] uppercase tracking-[0.1em] text-[#1A3C2B] font-semibold bg-transparent border-0 cursor-pointer py-2 px-1 flex items-center gap-1.5 hover:underline">
+            <span>01. Products</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+
+          <!-- Clean Mega Sub-Menu -->
+          <div class="nav-dropdown-menu">
+            <div class="pb-2.5 mb-3 hairline-b flex items-center justify-between">
+              <span class="tech-meta text-[#1A3C2B] font-bold">5 Katalog Produk Inti</span>
+              <span class="tech-meta text-[#3A3A38]">Buka di Studio →</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button class="submenu-item-bp" onclick="selectProductFromSubMenu('jd-match')">
+                <span class="font-mono-tech text-[10px] font-bold px-1.5 py-0.5 bg-[#FF8C69] text-[#1A3C2B]">01</span>
+                <div>
+                  <div class="font-mono-tech text-[11px] font-bold text-[#1A3C2B] uppercase">JD vs CV Match</div>
+                  <p class="text-xs text-[#3A3A38] m-0 mt-0.5">Cek persentase kecocokan CV &amp; analisis skill gap.</p>
+                </div>
+              </button>
+
+              <button class="submenu-item-bp" onclick="selectProductFromSubMenu('cv-prep', 'cv-polisher')">
+                <span class="font-mono-tech text-[10px] font-bold px-1.5 py-0.5 bg-[#9EFFBF] text-[#1A3C2B]">02</span>
+                <div>
+                  <div class="font-mono-tech text-[11px] font-bold text-[#1A3C2B] uppercase">AI CV Preparation</div>
+                  <p class="text-xs text-[#3A3A38] m-0 mt-0.5">Format CV ATS &amp; perapih kalimat pengalaman.</p>
+                </div>
+              </button>
+
+              <button class="submenu-item-bp" onclick="selectProductFromSubMenu('cv-prep', 'corp-presentation')">
+                <span class="font-mono-tech text-[10px] font-bold px-1.5 py-0.5 bg-[#F4D35E] text-[#1A3C2B]">03</span>
+                <div>
+                  <div class="font-mono-tech text-[11px] font-bold text-[#1A3C2B] uppercase">Corporate Presentation</div>
+                  <p class="text-xs text-[#3A3A38] m-0 mt-0.5">Panduan slide studi kasus standar korporat.</p>
+                </div>
+              </button>
+
+              <button class="submenu-item-bp" onclick="selectProductFromSubMenu('toolkits', 'all')">
+                <span class="font-mono-tech text-[10px] font-bold px-1.5 py-0.5 bg-[#1A3C2B] text-white">04</span>
+                <div>
+                  <div class="font-mono-tech text-[11px] font-bold text-[#1A3C2B] uppercase">Job-Ready Toolkits</div>
+                  <p class="text-xs text-[#3A3A38] m-0 mt-0.5">Case Kit IT GRC, Data Analyst, PMO &amp; ITSM.</p>
+                </div>
+              </button>
+
+              <button class="submenu-item-bp" onclick="selectProductFromSubMenu('interview')">
+                <span class="font-mono-tech text-[10px] font-bold px-1.5 py-0.5 bg-[#FF8C69] text-[#1A3C2B]">05</span>
+                <div>
+                  <div class="font-mono-tech text-[11px] font-bold text-[#1A3C2B] uppercase">Interview Mock Up</div>
+                  <p class="text-xs text-[#3A3A38] m-0 mt-0.5">Simulasi suara &amp; evaluasi metode STAR.</p>
+                </div>
+              </button>
+
+              <button class="submenu-item-bp" onclick="selectProductFromSubMenu('tracker')">
+                <span class="font-mono-tech text-[10px] font-bold px-1.5 py-0.5 bg-[#9EFFBF] text-[#1A3C2B]">06</span>
+                <div>
+                  <div class="font-mono-tech text-[11px] font-bold text-[#1A3C2B] uppercase">Application Tracker</div>
+                  <p class="text-xs text-[#3A3A38] m-0 mt-0.5">Papan pelacak status lamaran &amp; checklist.</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="switchMainPage('landing', 'pricing-section')" class="font-mono-tech text-[10px] uppercase tracking-[0.1em] text-[#3A3A38] hover:text-[#1A3C2B] bg-transparent border-0 cursor-pointer">
+          02. Pricing
+        </button>
+      </nav>
+
+      <!-- Right Side: Solid Forest Green Button + User Quota Icon -->
+      <div class="flex items-center gap-2">
+        <button class="btn-forest" onclick="selectProductFromSubMenu('jd-match')">
+          Coba Studio →
+        </button>
+
+        <!-- User Account & Quota Wallet (Square 32x32px Button) -->
+        <div id="user-account-wrapper" class="user-account-wrapper">
+          <button onclick="toggleUserAccountMenu(event)" aria-label="Profil dan Kuota Akun" title="Profil &amp; Kuota" class="w-8 h-8 bg-white border border-[#3A3A38]/40 text-[#1A3C2B] inline-flex items-center justify-center cursor-pointer p-0 hover:border-[#1A3C2B]">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+
+          <div class="user-account-menu text-left">
+            <div class="pb-2.5 hairline-b flex items-center justify-between">
+              <div>
+                <div class="font-mono-tech text-xs font-bold text-[#1A3C2B]">Raka Pratama, S.Kom.</div>
+                <div class="font-mono-tech text-[10px] text-[#3A3A38]">Fresh Graduate • Sistem Informasi</div>
+              </div>
+              <span id="user-plan-badge" class="px-2 py-0.5 bg-[#9EFFBF] text-[#1A3C2B] font-mono-tech text-[10px] font-bold uppercase">Trial</span>
+            </div>
+
+            <div class="py-2.5 hairline-b space-y-2 text-xs font-mono-tech">
+              <div class="text-[10px] font-bold text-[#3A3A38] uppercase tracking-wider">Sisa Kuota Anda</div>
+              <div class="flex items-center justify-between">
+                <span>Cek CV vs JD Match</span>
+                <strong id="studio-wallet-jd" class="text-[#1A3C2B]">1x</strong>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>AI CV Polisher</span>
+                <strong id="studio-wallet-cv" class="text-[#1A3C2B]">1x</strong>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Simulasi Interview</span>
+                <strong id="studio-wallet-interview" class="text-[#1A3C2B]">2 Sesi Trial</strong>
+              </div>
+            </div>
+
+            <div class="pt-2.5 space-y-1.5">
+              <button onclick="claimCampusReferral()" class="w-full py-2 px-2.5 bg-[#F4D35E] text-[#1A3C2B] font-mono-tech text-[10px] font-bold uppercase cursor-pointer border border-[#1A3C2B] text-left flex items-center justify-between">
+                <span>Ajak 2 Teman Kampus</span>
+                <span>+2 Kuota</span>
+              </button>
+              <button onclick="openScoreCardModal('jd-match')" class="w-full py-2 px-2.5 bg-white text-[#1A3C2B] font-mono-tech text-[10px] font-bold uppercase cursor-pointer border border-[#3A3A38]/30 text-left flex items-center justify-between">
+                <span>Kartu Skor Kesiapan</span>
+                <span>↗</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="toggleMobileMenu()" class="md:hidden px-2.5 py-1.5 bg-white border border-[#3A3A38]/40 font-mono-tech text-[10px] font-bold uppercase text-[#1A3C2B] cursor-pointer">
+          Menu ▾
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer md:hidden">
+      <div class="tech-meta text-[#1A3C2B] font-bold mb-2">Pilih Produk (Buka di Studio):</div>
+      <div class="grid grid-cols-1 gap-1.5 font-mono-tech text-xs">
+        <button onclick="selectProductFromSubMenu('jd-match')" class="py-2 px-3 bg-white text-left text-[#1A3C2B] border border-[#3A3A38]/20">01. JD vs CV Match</button>
+        <button onclick="selectProductFromSubMenu('cv-prep', 'cv-polisher')" class="py-2 px-3 bg-white text-left text-[#1A3C2B] border border-[#3A3A38]/20">02. AI CV Preparation</button>
+        <button onclick="selectProductFromSubMenu('cv-prep', 'corp-presentation')" class="py-2 px-3 bg-white text-left text-[#1A3C2B] border border-[#3A3A38]/20">03. Corporate Presentation Prep</button>
+        <button onclick="selectProductFromSubMenu('toolkits', 'all')" class="py-2 px-3 bg-white text-left text-[#1A3C2B] border border-[#3A3A38]/20">04. Job-Ready Case Kits &amp; Templates</button>
+        <button onclick="selectProductFromSubMenu('interview')" class="py-2 px-3 bg-white text-left text-[#1A3C2B] border border-[#3A3A38]/20">05. User Interview Mock Up</button>
+        <button onclick="selectProductFromSubMenu('tracker')" class="py-2 px-3 bg-white text-left text-[#1A3C2B] border border-[#3A3A38]/20">06. Job Application Tracker</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE VIEW 1: TECHNICAL BLUEPRINT LANDING PAGE                         -->
+  <!-- ===================================================================== -->
+  <div id="page-landing" class="page-view active">
+
+    <!-- 3. HERO SECTION (Concise Copy + Meaningful Platform Architecture Illustration) -->
+    <section class="hairline-b py-12 sm:py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+
+          <!-- Left Column: Space Grotesk Header + Concise JetBrains Mono Subtext -->
+          <div class="lg:col-span-7 space-y-5">
+            <div class="status-badge-bp">
+              <span class="status-dot-bp"></span>
+              <span class="font-mono-tech text-[10px] uppercase tracking-widest text-[#1A3C2B] font-semibold">Career Launchpad &amp; Job-Ready Toolkit</span>
+            </div>
+
+            <h1 class="font-display-bp font-hero-scale m-0 uppercase">
+              SIAP MELAMAR &amp; LOLOS INTERVIEW.
+            </h1>
+
+            <!-- Subtext in JetBrains Mono, 14px, all-caps, with a vertical 1px line on the left -->
+            <div class="border-l border-[#3A3A38] pl-4 py-1">
+              <p class="font-mono-tech text-[13px] sm:text-[14px] uppercase tracking-wider text-[#3A3A38] m-0 leading-relaxed">
+                CEK KECOCOKAN CV VS JD, BANGUN PORTOFOLIO STUDI KASUS NYATA (IT GRC, DATA ANALYST, PMO), DAN LATIHAN INTERVIEW METODE STAR DALAM SATU PLATFORM.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <button class="btn-forest py-3 px-6" onclick="selectProductFromSubMenu('jd-match')">
+                Buka Interactive Studio →
+              </button>
+              <button class="btn-ghost-bp py-3 px-5 bg-[#F7F7F5]" onclick="switchMainPage('landing', 'bento-features')">
+                Lihat 5 Produk Inti
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Clear Visual Blueprint Illustration Explaining the Platform -->
+          <div class="lg:col-span-5">
+            <div class="hairline-box bg-[#F7F7F5] p-4 relative max-w-[450px] mx-auto flex flex-col justify-between space-y-3">
+              <div class="flex items-center justify-between hairline-b pb-2">
+                <span class="tech-meta text-[#1A3C2B] font-bold">Ekosistem Kesiapan Karir</span>
+                <span class="px-2 py-0.5 bg-[#9EFFBF] text-[#1A3C2B] font-mono-tech text-[10px] font-bold">46% → 89% READY</span>
+              </div>
+
+              <!-- Platform Blueprint Illustration: Candidate Center + Orbiting Product Nodes + Live Score Card Overlay -->
+              <div class="relative border border-[#3A3A38]/20 overflow-hidden bg-white p-3">
+                <!-- Background Candidate Workspace Image (Luminosity blended, full color on hover) -->
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80"
+                  alt="Ilustrasi Persiapan Karir dan Portofolio"
+                  class="img-luminosity w-full h-44 object-cover border border-[#3A3A38]/20"
+                />
+
+                <!-- Clear Interactive Blueprint Diagram Explaining How the Platform Works -->
+                <div class="mt-3 grid grid-cols-2 gap-2 font-mono-tech text-[11px]">
+                  <div class="p-2.5 bg-[#F7F7F5] border border-[#3A3A38]/20">
+                    <div class="text-[10px] text-[#3A3A38]">1. DIAGNOSA CV VS JD</div>
+                    <div class="font-bold text-[#1A3C2B] mt-0.5">Deteksi 8 Keyword Hilang</div>
+                  </div>
+                  <div class="p-2.5 bg-[#F7F7F5] border border-[#3A3A38]/20">
+                    <div class="text-[10px] text-[#3A3A38]">2. AI CV &amp; SLIDE PREP</div>
+                    <div class="font-bold text-[#1A3C2B] mt-0.5">Format ATS &amp; Minto Deck</div>
+                  </div>
+                  <div class="p-2.5 bg-[#F7F7F5] border border-[#3A3A38]/20">
+                    <div class="text-[10px] text-[#3A3A38]">3. JOB-READY CASE KIT</div>
+                    <div class="font-bold text-[#1A3C2B] mt-0.5">Proyek Audit &amp; Data BI</div>
+                  </div>
+                  <div class="p-2.5 bg-[#9EFFBF]/40 border border-[#1A3C2B]">
+                    <div class="text-[10px] text-[#1A3C2B]">4. MOCK INTERVIEW</div>
+                    <div class="font-bold text-[#1A3C2B] mt-0.5">Simulasi Suara STAR</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between hairline-t pt-2 font-mono-tech text-[10px]">
+                <span class="text-[#3A3A38]">IT GRC • Data Analyst • PMO • ITSM</span>
+                <button onclick="selectProductFromSubMenu('jd-match')" class="text-[#1A3C2B] font-bold hover:underline bg-transparent border-0 cursor-pointer p-0">UJI COBA →</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- INTERACTIVE STORYBOARD WINDOW (Clean & Concise)                 -->
+        <!-- =============================================================== -->
+        <div id="hero-motion-window" class="mt-10 hairline-box bg-[#F7F7F5] p-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-3 hairline-b mb-4">
+            <span class="font-mono-tech text-xs font-bold text-[#1A3C2B]">SIMULASI PERJALANAN KANDIDAT (4 TAHAP)</span>
+            <span id="hero-live-score" class="px-3 py-1 text-xs font-bold font-mono-num bg-[#F4D35E] text-[#1A3C2B]">
+              46% Initial Match
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 pb-4 hairline-b">
+            <button class="motion-step-btn active" onclick="selectHeroMotionStep(0)">
+              <div class="font-mono-tech text-xs font-bold text-[#1A3C2B]">01. Diagnosa CV vs JD</div>
+              <div class="font-mono-tech text-[10px] text-[#3A3A38]">Cek missing keyword</div>
+              <div class="motion-bar-track"><div class="motion-bar-fill"></div></div>
+            </button>
+            <button class="motion-step-btn" onclick="selectHeroMotionStep(1)">
+              <div class="font-mono-tech text-xs font-bold text-[#1A3C2B]">02. AI CV &amp; Presentation</div>
+              <div class="font-mono-tech text-[10px] text-[#3A3A38]">Perbaiki kalimat CV</div>
+              <div class="motion-bar-track"><div class="motion-bar-fill"></div></div>
+            </button>
+            <button class="motion-step-btn" onclick="selectHeroMotionStep(2)">
+              <div class="font-mono-tech text-xs font-bold text-[#1A3C2B]">03. Job-Ready Case Kit</div>
+              <div class="font-mono-tech text-[10px] text-[#3A3A38]">Bangun portofolio nyata</div>
+              <div class="motion-bar-track"><div class="motion-bar-fill"></div></div>
+            </button>
+            <button class="motion-step-btn" onclick="selectHeroMotionStep(3)">
+              <div class="font-mono-tech text-xs font-bold text-[#1A3C2B]">04. Mock Interview</div>
+              <div class="font-mono-tech text-[10px] text-[#3A3A38]">Latihan suara STAR</div>
+              <div class="motion-bar-track"><div class="motion-bar-fill"></div></div>
+            </button>
+          </div>
+
+          <div class="py-2.5 hairline-b flex items-center gap-2 text-xs font-mono-tech">
+            <span class="w-2 h-2 bg-[#1A3C2B] shrink-0"></span>
+            <span id="hero-status-pill" class="font-semibold text-[#1A3C2B]">
+              Terdeteksi 8 Missing Keywords kritis (ISO 27001, RCM, SQL CTE, RAID Log)
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-4 items-center">
+            <div class="lg:col-span-5 space-y-2">
+              <svg class="w-full h-32 overflow-visible bg-white border border-[#3A3A38]/20 p-2" viewBox="0 0 420 120" fill="none">
+                <line x1="0" y1="20" x2="420" y2="20" stroke="#3A3A38" stroke-opacity="0.2" stroke-dasharray="3 3" />
+                <line x1="0" y1="60" x2="420" y2="60" stroke="#3A3A38" stroke-opacity="0.2" stroke-dasharray="3 3" />
+                <line x1="0" y1="100" x2="420" y2="100" stroke="#3A3A38" stroke-opacity="0.3" />
+                <path d="M 16 100 C 120 95, 220 55, 404 16" stroke="#3A3A38" stroke-opacity="0.2" stroke-width="2" fill="none" />
+                <path id="hero-growth-path" class="motion-curve-line" d="M 16 100 C 120 95, 220 55, 404 16" stroke="#1A3C2B" stroke-width="2.5" fill="none" />
+                <rect x="12" y="96" width="8" height="8" fill="#FF8C69" stroke="#1A3C2B" />
+                <rect x="146" y="74" width="8" height="8" fill="#F4D35E" stroke="#1A3C2B" />
+                <rect x="281" y="36" width="8" height="8" fill="#9EFFBF" stroke="#1A3C2B" />
+                <rect x="400" y="12" width="8" height="8" fill="#1A3C2B" />
+              </svg>
+              <p id="hero-motion-narration" class="text-xs text-[#3A3A38] m-0 leading-relaxed">
+                Tahap 1: Kandidat mengecek persentase kecocokan CV dengan Job Description dan menemukan celah kata kunci penyebab gagal screening ATS.
+              </p>
+            </div>
+
+            <div class="lg:col-span-7 overflow-x-auto lg:border-l lg:border-[#3A3A38]/20 lg:pl-6">
+              <table class="w-full text-left border-collapse text-xs font-mono-tech bg-white border border-[#3A3A38]/20">
+                <thead>
+                  <tr class="hairline-b text-[#1A3C2B] bg-[#F7F7F5]">
+                    <th class="py-2 px-3">Posisi Tujuan</th>
+                    <th class="py-2 px-3">Skor Awal</th>
+                    <th class="py-2 px-3">Solusi Produk</th>
+                    <th class="py-2 px-3">Sesudah</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-[#3A3A38]/20">
+                  <tr class="hero-sheet-row">
+                    <td class="py-2.5 px-3 font-semibold text-[#1A3C2B]">Junior IT GRC &amp; Audit</td>
+                    <td class="py-2.5 px-3 text-[#3A3A38]">46%</td>
+                    <td class="py-2.5 px-3 text-[#3A3A38]">+IT GRC Case Kit (RCM)</td>
+                    <td class="py-2.5 px-3 font-bold text-[#1A3C2B]">89% Ready</td>
+                  </tr>
+                  <tr class="hero-sheet-row">
+                    <td class="py-2.5 px-3 font-semibold text-[#1A3C2B]">Associate Data Analyst</td>
+                    <td class="py-2.5 px-3 text-[#3A3A38]">52%</td>
+                    <td class="py-2.5 px-3 text-[#3A3A38]">+Data Analyst Kit (SQL/BI)</td>
+                    <td class="py-2.5 px-3 font-bold text-[#1A3C2B]">91% Ready</td>
+                  </tr>
+                  <tr class="hero-sheet-row">
+                    <td class="py-2.5 px-3 font-semibold text-[#1A3C2B]">Junior PMO Officer</td>
+                    <td class="py-2.5 px-3 text-[#3A3A38]">44%</td>
+                    <td class="py-2.5 px-3 text-[#3A3A38]">+Template PMO &amp; ITSM</td>
+                    <td class="py-2.5 px-3 font-bold text-[#1A3C2B]">87% Ready</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 4. BENTO FEATURE GRID (Product-Related Header & Simplified Copy)    -->
+    <!-- =================================================================== -->
+    <section id="bento-features" class="hairline-b py-14 px-4">
+      <div class="max-w-6xl mx-auto space-y-8">
+        <div class="max-w-2xl">
+          <div class="tech-meta text-[#1A3C2B] font-bold mb-2">Katalog 5 Produk Inti</div>
+          <h2 class="font-display-bp text-3xl sm:text-5xl m-0 uppercase">
+            SOLUSI LENGKAP DARI REVISI CV HINGGA LOLOS INTERVIEW
+          </h2>
+          <p class="text-sm text-[#3A3A38] mt-3 m-0">
+            Pilih produk sesuai tahapan melamar kerja Anda—mulai dari diagnosa CV, perapihan dokumen ATS, pembuatan portofolio studi kasus, hingga latihan wawancara.
+          </p>
+        </div>
+
+        <!-- 2x2 Bento Grid with 1px 'Grid' color gap -->
+        <div class="bento-grid-2x2">
+
+          <!-- CELL 01: JD vs CV Match (Coral Left-Border Accent) -->
+          <div class="bento-cell space-y-4">
+            <div class="space-y-2">
+              <div class="accent-border-coral tech-meta text-[#1A3C2B] font-bold">
+                01. Pay-Per-Try • Mulai Gratis / Rp 29.000
+              </div>
+              <h3 class="font-display-bp text-2xl m-0 uppercase">
+                JD VS CV MATCH PERCENTAGE
+              </h3>
+              <p class="text-sm text-[#3A3A38] m-0 leading-relaxed">
+                Cek persentase kecocokan CV dengan lowongan tujuan dan temukan kata kunci teknis yang belum tercantum.
+              </p>
+            </div>
+
+            <div class="bg-white border border-[#3A3A38]/30 p-4 font-mono-tech text-xs space-y-2">
+              <div class="flex items-center justify-between hairline-b pb-2">
+                <span class="text-[10px] font-bold text-[#1A3C2B]">Hasil Diagnosa CV</span>
+                <span class="px-2 py-0.5 bg-[#FF8C69] text-[#1A3C2B] text-[10px] font-bold">8 Keyword Hilang</span>
+              </div>
+              <div class="text-[11px] text-[#3A3A38]">
+                Missing: <span class="bg-[#FF8C69]/30 px-1 text-[#1A3C2B]">ISO 27001</span> <span class="bg-[#FF8C69]/30 px-1 text-[#1A3C2B]">RCM Matrix</span> <span class="bg-[#FF8C69]/30 px-1 text-[#1A3C2B]">SQL CTE</span>
+              </div>
+              <div class="pt-1 flex justify-end">
+                <button class="btn-forest" onclick="selectProductFromSubMenu('jd-match')">Cek Skor CV →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CELL 02: Job-Ready Case Kits (Mint Left-Border Accent) -->
+          <div class="bento-cell space-y-4">
+            <div class="space-y-2">
+              <div class="accent-border-mint tech-meta text-[#1A3C2B] font-bold">
+                02. Sekali Beli • Rp 49.000 – Rp 199.000
+              </div>
+              <h3 class="font-display-bp text-2xl m-0 uppercase">
+                JOB-READY CASE KITS &amp; TEMPLATES
+              </h3>
+              <p class="text-sm text-[#3A3A38] m-0 leading-relaxed">
+                Bangun portofolio pengganti pengalaman kerja: Audit Working Paper ISO 27001, proyek Data Analyst (SQL/BI), serta template PMO &amp; ITSM.
+              </p>
+            </div>
+
+            <div class="bg-white border border-[#3A3A38]/30 p-4 font-mono-tech text-xs space-y-2">
+              <div class="flex items-center justify-between hairline-b pb-2">
+                <span class="text-[10px] font-bold text-[#1A3C2B]">Portofolio Siap Pakai</span>
+                <span class="px-2 py-0.5 bg-[#9EFFBF] text-[#1A3C2B] text-[10px] font-bold">Sekali Bayar</span>
+              </div>
+              <div class="text-[11px] text-[#3A3A38]">
+                Deliverable: Kertas Kerja RCM ISO 27001, Dataset Bisnis 50K Baris, WBS &amp; RAID Log.
+              </div>
+              <div class="pt-1 flex justify-end">
+                <button class="btn-forest" onclick="selectProductFromSubMenu('toolkits', 'all')">Lihat Toolkit →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CELL 03: AI CV Polisher & Corporate Presentation (Gold Left-Border Accent) -->
+          <div class="bento-cell space-y-4">
+            <div class="space-y-2">
+              <div class="accent-border-gold tech-meta text-[#1A3C2B] font-bold">
+                03. Sekali Beli • Rp 49.000 – Rp 59.000
+              </div>
+              <h3 class="font-display-bp text-2xl m-0 uppercase">
+                AI CV POLISHER &amp; PRESENTATION PREP
+              </h3>
+              <p class="text-sm text-[#3A3A38] m-0 leading-relaxed">
+                Ubah kalimat pengalaman kepanitiaan atau magang menjadi bullet points berstandar HRD, lengkap dengan template slide presentasi studi kasus.
+              </p>
+            </div>
+
+            <div class="bg-white border border-[#3A3A38]/30 p-4 font-mono-tech text-xs space-y-2">
+              <div class="flex items-center justify-between hairline-b pb-2">
+                <span class="text-[10px] font-bold text-[#1A3C2B]">Perbaikan Kalimat CV</span>
+                <span class="px-2 py-0.5 bg-[#F4D35E] text-[#1A3C2B] text-[10px] font-bold">Standar ATS</span>
+              </div>
+              <div class="text-[11px] text-[#1A3C2B]">
+                + Melaksanakan User Access Review (UAR) atas 250+ akun sistem sesuai ISO 27001.
+              </div>
+              <div class="pt-1 flex justify-end">
+                <button class="btn-forest" onclick="selectProductFromSubMenu('cv-prep', 'cv-polisher')">Rapikan CV →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CELL 04: AI User Interview Mock Up & Human Review (Coral/Forest Accent) -->
+          <div class="bento-cell space-y-4">
+            <div class="space-y-2">
+              <div class="accent-border-coral tech-meta text-[#1A3C2B] font-bold">
+                04. Membership Rp 49.000/bln &amp; Sesi Praktisi
+              </div>
+              <h3 class="font-display-bp text-2xl m-0 uppercase">
+                USER INTERVIEW MOCK UP &amp; HUMAN REVIEW
+              </h3>
+              <p class="text-sm text-[#3A3A38] m-0 leading-relaxed">
+                Latihan tanya-jawab interview menggunakan suara dengan evaluasi metode STAR, contoh jawaban senior, serta opsi review 1-on-1 bersama praktisi.
+              </p>
+            </div>
+
+            <div class="bg-white border border-[#3A3A38]/30 p-4 font-mono-tech text-xs space-y-2">
+              <div class="flex items-center justify-between hairline-b pb-2">
+                <span class="text-[10px] font-bold text-[#1A3C2B]">Evaluasi Jawaban STAR</span>
+                <span class="px-2 py-0.5 bg-[#9EFFBF] text-[#1A3C2B] text-[10px] font-bold">Skor: 86/100</span>
+              </div>
+              <div class="text-[11px] text-[#3A3A38]">
+                Feedback: "Tambahkan referensi klausul Annex A.5.18 agar jawaban lebih kuat."
+              </div>
+              <div class="pt-1 flex justify-end">
+                <button class="btn-forest" onclick="selectProductFromSubMenu('interview')">Mulai Latihan →</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 5. MONOSPACED TESTIMONIAL CARDS (Clean & Concise)                   -->
+    <!-- =================================================================== -->
+    <section id="wall-of-love" class="hairline-b py-14 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="mb-8">
+          <div class="tech-meta text-[#1A3C2B] font-bold mb-2">Cerita Pengguna &amp; Praktisi</div>
+          <h2 class="font-display-bp text-3xl sm:text-5xl m-0 uppercase">
+            APA KATA MEREKA
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Card 1 -->
+          <div class="hairline-box bg-[#F7F7F5] flex flex-col justify-between">
+            <div class="p-4 space-y-4">
+              <div class="flex items-center justify-between hairline-b pb-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#1A3C2B"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+                <div class="flex items-center gap-1 text-[#1A3C2B]" aria-label="5 out of 5 stars">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+              </div>
+              <p class="font-mono-tech text-[12px] leading-[1.6] text-[#3A3A38] m-0">
+                "Lewat IT GRC Job-Ready Kit, saya akhirnya paham bentuk Risk Control Matrix dan cara menulis Audit Working Paper. Saat User Interview di bank digital, saya bisa menjelaskan prosedur pengujian bukti dengan runtut."
+              </p>
+            </div>
+            <div class="hairline-t p-4 bg-white flex items-center gap-3">
+              <div class="w-9 h-9 bg-[#1A3C2B] text-white font-mono-tech text-xs font-bold flex items-center justify-center shrink-0">DN</div>
+              <div class="font-mono-tech">
+                <div class="text-[11px] font-bold text-[#1A3C2B] uppercase">Dimas Nugroho</div>
+                <div class="text-[10px] text-[#3A3A38]">Fresh Graduate Sistem Informasi</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="hairline-box bg-[#F7F7F5] flex flex-col justify-between">
+            <div class="p-4 space-y-4">
+              <div class="flex items-center justify-between hairline-b pb-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#1A3C2B"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+                <div class="flex items-center gap-1 text-[#1A3C2B]" aria-label="5 out of 5 stars">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+              </div>
+              <p class="font-mono-tech text-[12px] leading-[1.6] text-[#3A3A38] m-0">
+                "Kandidat junior biasanya hafal teori kontrol, tapi bingung saat diminta menguji sampel bukti. Studi kasus sintetis di platform ini menjembatani celah tersebut secara praktis."
+              </p>
+            </div>
+            <div class="hairline-t p-4 bg-white flex items-center gap-3">
+              <div class="w-9 h-9 bg-[#FF8C69] text-[#1A3C2B] font-mono-tech text-xs font-bold flex items-center justify-center shrink-0">RF</div>
+              <div class="font-mono-tech">
+                <div class="text-[11px] font-bold text-[#1A3C2B] uppercase">Reza Firmansyah, CISA</div>
+                <div class="text-[10px] text-[#3A3A38]">IT GRC Practitioner</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="hairline-box bg-[#F7F7F5] flex flex-col justify-between">
+            <div class="p-4 space-y-4">
+              <div class="flex items-center justify-between hairline-b pb-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#1A3C2B"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+                <div class="flex items-center gap-1 text-[#1A3C2B]" aria-label="5 out of 5 stars">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#1A3C2B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+              </div>
+              <p class="font-mono-tech text-[12px] leading-[1.6] text-[#3A3A38] m-0">
+                "Data Analyst Job-Ready Kit memberi dataset bisnis beserta 5 pertanyaan bisnis yang jelas. Dalam seminggu saya punya 1 proyek SQL &amp; Power BI utuh untuk dipasang di CV."
+              </p>
+            </div>
+            <div class="hairline-t p-4 bg-white flex items-center gap-3">
+              <div class="w-9 h-9 bg-[#9EFFBF] text-[#1A3C2B] font-mono-tech text-xs font-bold flex items-center justify-center shrink-0">KA</div>
+              <div class="font-mono-tech">
+                <div class="text-[11px] font-bold text-[#1A3C2B] uppercase">Kevin Ardiansyah</div>
+                <div class="text-[10px] text-[#3A3A38]">Junior Data Analyst</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 6. PRICING SUMMARY TABLE                                            -->
+    <!-- =================================================================== -->
+    <section id="pricing-section" class="hairline-b py-14 px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-8">
+          <div class="tech-meta text-[#1A3C2B] font-bold mb-2">Skema Pembelian Fleksibel</div>
+          <h2 class="font-display-bp text-3xl sm:text-5xl m-0 uppercase">DAFTAR HARGA PRODUK</h2>
+          <p class="text-sm text-[#3A3A38] mt-2">
+            Tanpa langganan paksa. Pilih produk sekali beli atau kuota sesuai kebutuhan Anda saat ini.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto hairline-box bg-white">
+          <table class="w-full text-left border-collapse text-xs font-mono-tech">
+            <thead>
+              <tr class="hairline-b bg-[#F7F7F5] text-[#1A3C2B]">
+                <th class="py-3.5 px-4">Kategori Produk</th>
+                <th class="py-3.5 px-4">Skema</th>
+                <th class="py-3.5 px-4">Harga</th>
+                <th class="py-3.5 px-4 text-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#3A3A38]/20">
+              <tr>
+                <td class="py-3.5 px-4 font-bold text-[#1A3C2B]">01. Template PMO, ITSM, Daily &amp; Job Tracker</td>
+                <td class="py-3.5 px-4 text-[#3A3A38]">Sekali Beli</td>
+                <td class="py-3.5 px-4 font-bold">Rp 29.000 – Rp 79.000</td>
+                <td class="py-3.5 px-4 text-right"><button class="font-mono-tech text-xs font-bold text-[#1A3C2B] hover:underline bg-transparent border-0 cursor-pointer" onclick="selectProductFromSubMenu('toolkits', 'template')">Buka →</button></td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 font-bold text-[#1A3C2B]">02. AI CV Preparation, Presentation &amp; JD Match</td>
+                <td class="py-3.5 px-4 text-[#3A3A38]">Per Kuota / Paket</td>
+                <td class="py-3.5 px-4 font-bold">Rp 29.000 – Rp 99.000</td>
+                <td class="py-3.5 px-4 text-right"><button class="font-mono-tech text-xs font-bold text-[#1A3C2B] hover:underline bg-transparent border-0 cursor-pointer" onclick="selectProductFromSubMenu('jd-match')">Coba →</button></td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 font-bold text-[#1A3C2B]">03. Job-Ready Case Kits (Data Analyst / IT GRC)</td>
+                <td class="py-3.5 px-4 text-[#3A3A38]">Sekali Beli per Track</td>
+                <td class="py-3.5 px-4 font-bold">Rp 99.000 – Rp 199.000</td>
+                <td class="py-3.5 px-4 text-right"><button class="font-mono-tech text-xs font-bold text-[#1A3C2B] hover:underline bg-transparent border-0 cursor-pointer" onclick="selectProductFromSubMenu('toolkits', 'toolkit')">Pilih Track →</button></td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 font-bold text-[#1A3C2B]">04. Membership User Interview Mock Up (STAR)</td>
+                <td class="py-3.5 px-4 text-[#3A3A38]">Bulanan (20 Sesi)</td>
+                <td class="py-3.5 px-4 font-bold">Rp 39.000 – Rp 79.000 / bln</td>
+                <td class="py-3.5 px-4 text-right"><button class="font-mono-tech text-xs font-bold text-[#1A3C2B] hover:underline bg-transparent border-0 cursor-pointer" onclick="selectProductFromSubMenu('interview')">Latihan →</button></td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 font-bold text-[#1A3C2B]">05. 1-on-1 Review bersama Praktisi</td>
+                <td class="py-3.5 px-4 text-[#3A3A38]">Per Sesi Terbatas</td>
+                <td class="py-3.5 px-4 font-bold">Rp 149.000 – Rp 249.000</td>
+                <td class="py-3.5 px-4 text-right"><button class="font-mono-tech text-xs font-bold text-[#1A3C2B] hover:underline bg-transparent border-0 cursor-pointer" onclick="selectProductFromSubMenu('toolkits', 'service')">Lihat Slot →</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 7. TECHNICAL FORM CTA (640px wide, 4 L-shaped Corner Markers)       -->
+    <!-- =================================================================== -->
+    <section id="tech-cta-section" class="py-14 px-4">
+      <div class="tech-cta-box">
+        <span class="corner-marker corner-tl"></span>
+        <span class="corner-marker corner-tr"></span>
+        <span class="corner-marker corner-bl"></span>
+        <span class="corner-marker corner-br"></span>
+
+        <div class="space-y-2 mb-5 hairline-b pb-4">
+          <div class="status-badge-bp">
+            <span class="status-dot-bp"></span>
+            <span class="font-mono-tech text-[10px] uppercase tracking-widest text-[#1A3C2B] font-semibold">Mulai Simulasi Gratis</span>
+          </div>
+          <h2 class="font-display-bp text-3xl sm:text-4xl m-0 uppercase pt-1">
+            CEK KESIAPAN KARIR ANDA
+          </h2>
+          <p class="text-xs text-[#3A3A38] m-0">
+            Pilih jalur karir tujuan Anda untuk langsung mencoba simulasi di Interactive Studio.
+          </p>
+        </div>
+
+        <form onsubmit="event.preventDefault(); selectProductFromSubMenu('jd-match');" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="cta-target-track" class="tech-meta text-[#1A3C2B] font-bold block mb-1.5">01. Jalur Karir Tujuan</label>
+              <select id="cta-target-track" onchange="selectJdScenario(this.value)" class="w-full p-2.5 bg-white border border-[#3A3A38]/40 font-mono-tech text-xs text-[#1A3C2B] focus:outline-none focus:border-[#1A3C2B]">
+                <option value="it-grc">IT GRC &amp; ISO 27001 Audit</option>
+                <option value="data-analyst">Data Analyst (SQL &amp; Power BI)</option>
+                <option value="pmo">PMO &amp; Project Governance</option>
+              </select>
+            </div>
+            <div>
+              <label for="cta-priority-module" class="tech-meta text-[#1A3C2B] font-bold block mb-1.5">02. Kebutuhan Utama</label>
+              <select id="cta-priority-module" class="w-full p-2.5 bg-white border border-[#3A3A38]/40 font-mono-tech text-xs text-[#1A3C2B] focus:outline-none focus:border-[#1A3C2B]">
+                <option value="jd-match">Cek Kecocokan CV vs JD</option>
+                <option value="toolkits">Bangun Portofolio Studi Kasus</option>
+                <option value="interview">Latihan Suara User Interview</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-2 flex justify-end">
+            <button type="submit" class="btn-forest py-3 px-6 w-full sm:w-auto">
+              Buka Interactive Studio →
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE VIEW 2: DEDICATED "INTERACTIVE STUDIO" TAB PAGE                  -->
+  <!-- ===================================================================== -->
+  <div id="page-studio" class="page-view">
+    <section class="py-8 px-4 min-h-screen">
+      <div class="max-w-6xl mx-auto space-y-6">
+
+        <!-- Studio Top Bar -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 hairline-b">
+          <div>
+            <h1 class="font-display-bp text-2xl sm:text-4xl m-0 uppercase">INTERACTIVE PRODUCT STUDIO</h1>
+            <p class="text-xs text-[#3A3A38] m-0 mt-1">Uji coba langsung seluruh 5 produk inti dalam satu ruang kerja terpadu.</p>
+          </div>
+
+          <!-- Segmented Technical Studio Bar -->
+          <div class="studio-pill-bar">
+            <button class="studio-pill-btn active" data-pane="jd-match" onclick="switchStudioPane('jd-match')">
+              <span>01. JD vs CV Match</span>
+            </button>
+            <button class="studio-pill-btn" data-pane="cv-prep" onclick="switchStudioPane('cv-prep')">
+              <span>02. CV &amp; Presentation</span>
+            </button>
+            <button class="studio-pill-btn" data-pane="toolkits" onclick="switchStudioPane('toolkits')">
+              <span>03. Toolkits &amp; Templates</span>
+            </button>
+            <button class="studio-pill-btn" data-pane="tracker" onclick="switchStudioPane('tracker')">
+              <span>04. Job Tracker</span>
+            </button>
+            <button class="studio-pill-btn" data-pane="interview" onclick="switchStudioPane('interview')">
+              <span>05. Mock Interview</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- MAIN INTERACTIVE STUDIO CONTAINER -->
+        <div class="hairline-box bg-[#F7F7F5] p-5 sm:p-8">
+
+          <!-- PANE 1: JD vs CV MATCH PERCENTAGE -->
+          <div id="pane-jd-match" class="studio-pane active space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 hairline-b pb-4">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-[#1A3C2B] m-0 font-mono-tech uppercase">Job Description vs CV Match Percentage</h2>
+                <p class="text-xs text-[#3A3A38] m-0 mt-1">Analisis kecocokan kata kunci profesi (40%) &amp; relevansi konteks pengalaman (60%)</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="tech-meta text-[#3A3A38]">Skenario:</span>
+                <button class="scenario-pill" data-role="it-grc" onclick="selectJdScenario('it-grc')">IT GRC / Audit</button>
+                <button class="scenario-pill" data-role="data-analyst" onclick="selectJdScenario('data-analyst')">Data Analyst</button>
+                <button class="scenario-pill" data-role="pmo" onclick="selectJdScenario('pmo')">PMO / IT Project</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+              <div class="lg:col-span-5 space-y-4">
+                <div class="flex items-center justify-between">
+                  <label for="input-jd-text" class="tech-meta font-bold text-[#1A3C2B]">01. Job Description</label>
+                  <span id="jd-char-count" class="font-mono-tech text-[11px] text-[#3A3A38]">0 / 3.000 kar</span>
+                </div>
+                <textarea id="input-jd-text" rows="5" maxlength="3000" oninput="updateCharCounters()" class="w-full p-3.5 bg-white border border-[#3A3A38]/40 text-xs text-[#1A3C2B] font-mono-tech focus:outline-none leading-relaxed"></textarea>
+
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                  <label for="input-cv-text" class="tech-meta font-bold text-[#1A3C2B]">02. Ringkasan CV Anda</label>
+                  <div class="flex items-center gap-2">
+                    <button onclick="applyPiiScrubberToInput()" class="px-2 py-0.5 bg-[#9EFFBF] text-[#1A3C2B] font-mono-tech text-[10px] font-bold uppercase cursor-pointer border border-[#1A3C2B]" title="Sensor otomatis NIK, No HP, dan Email">
+                      Sensor Data Pribadi
+                    </button>
+                    <span id="cv-char-count" class="font-mono-tech text-[11px] text-[#3A3A38]">0 / 4.000 kar</span>
+                  </div>
+                </div>
+                <textarea id="input-cv-text" rows="4" maxlength="4000" oninput="updateCharCounters()" class="w-full p-3.5 bg-white border border-[#3A3A38]/40 text-xs text-[#1A3C2B] font-mono-tech focus:outline-none leading-relaxed"></textarea>
+
+                <button class="w-full btn-forest py-3.5" onclick="runJdMatchAnalysis()">
+                  Hitung Kecocokan CV vs JD →
+                </button>
+              </div>
+
+              <div class="lg:col-span-7 space-y-5 lg:border-l lg:border-[#3A3A38]/20 lg:pl-8">
+                <div class="flex flex-wrap items-center justify-between gap-4 hairline-b pb-4">
+                  <div>
+                    <div class="tech-meta text-[#3A3A38]">Skor Kecocokan CV</div>
+                    <div class="flex flex-wrap items-baseline gap-2.5 mt-1">
+                      <span id="match-score-number" class="text-3xl font-bold font-mono-tech text-[#1A3C2B]">46%</span>
+                      <span id="match-status-badge" class="px-3 py-1 text-xs font-semibold bg-amber-100 text-amber-900">Perlu Perbaikan</span>
+                      <button onclick="openScoreCardModal('jd-match')" class="px-2.5 py-1 bg-white border border-[#3A3A38]/40 text-[#1A3C2B] font-mono-tech text-[10px] font-bold uppercase cursor-pointer">
+                        Bagikan Skor ↗
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-6 text-xs font-mono-tech">
+                    <div>
+                      <span class="text-[#3A3A38] block text-[10px]">Keyword (40%)</span>
+                      <strong id="subscore-keyword" class="text-sm text-[#1A3C2B]">40%</strong>
+                    </div>
+                    <div>
+                      <span class="text-[#3A3A38] block text-[10px]">Konteks (60%)</span>
+                      <strong id="subscore-context" class="text-sm text-[#1A3C2B]">50%</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="w-full h-2.5 bg-white border border-[#3A3A38]/30 overflow-hidden">
+                  <div id="match-score-bar" class="h-full bg-amber-500 transition-all duration-700" style="width: 46%;"></div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                  <div>
+                    <div class="tech-meta font-bold text-[#1A3C2B] mb-2">Keyword Sudah Ada:</div>
+                    <div id="matched-keywords-list" class="flex flex-wrap gap-1.5"></div>
+                  </div>
+                  <div>
+                    <div class="tech-meta font-bold text-[#1A3C2B] mb-2">Missing Keywords (Skill Gap):</div>
+                    <div id="missing-keywords-list" class="flex flex-wrap gap-1.5"></div>
+                  </div>
+                </div>
+
+                <div class="py-2.5 hairline-t hairline-b flex flex-wrap items-center justify-between gap-2 text-xs font-mono-tech">
+                  <span class="text-[#3A3A38]"><strong class="text-[#1A3C2B]">Tren Keahlian:</strong> <span id="market-radar-trend">Kepatuhan UU PDP &amp; ISO 27001:2022 Annex A.5.18</span></span>
+                  <span id="cache-hash-indicator" class="text-[10px] text-[#1A3C2B] bg-[#9EFFBF] px-2 py-0.5 font-bold">Tersimpan</span>
+                </div>
+
+                <div class="pt-1">
+                  <div class="tech-meta font-bold text-[#1A3C2B] mb-1">Saran Perbaikan Kalimat (2 Gratis):</div>
+                  <div id="free-recommendations-list"></div>
+                </div>
+
+                <div class="pt-1 space-y-3">
+                  <div id="locked-recommendations-list" class="divide-y divide-slate-200 redacted-blur"></div>
+                  <div id="blurred-teaser-overlay" class="p-4 sm:p-5 bg-[#F4D35E]/35 border border-[#1A3C2B] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="text-left space-y-1">
+                      <h3 class="text-sm font-bold text-[#1A3C2B] m-0 font-mono-tech uppercase">Buka Seluruh 6 Kalimat ATS + 5x Kuota Cek CV</h3>
+                      <p class="text-xs text-[#3A3A38] m-0">Dapatkan rekomendasi kalimat siap salin untuk menaikkan skor CV dari 46% menjadi 89%.</p>
+                    </div>
+                    <button class="btn-forest shrink-0" onclick="openQrisCheckout({ title: 'Buka Hasil Lengkap + 5x Kuota CV Match', price: 29000, type: 'unlock-jd-match', allowOrderBump: true })">
+                      Buka via QRIS — Rp 29.000
+                    </button>
+                  </div>
+                </div>
+
+                <div class="pt-3 hairline-t flex flex-wrap items-center justify-between gap-2 text-xs font-mono-tech text-[#3A3A38]">
+                  <span>Apakah saran ini membantu?</span>
+                  <div class="flex items-center gap-1.5">
+                    <button onclick="submitAiTelemetryRating('JD vs CV Match', 1)" class="px-2 py-0.5 bg-white border border-[#3A3A38]/30 text-[#1A3C2B] text-xs cursor-pointer">1</button>
+                    <button onclick="submitAiTelemetryRating('JD vs CV Match', 2)" class="px-2 py-0.5 bg-white border border-[#3A3A38]/30 text-[#1A3C2B] text-xs cursor-pointer">2</button>
+                    <button onclick="submitAiTelemetryRating('JD vs CV Match', 3)" class="px-2 py-0.5 bg-white border border-[#3A3A38]/30 text-[#1A3C2B] text-xs cursor-pointer">3</button>
+                    <button onclick="submitAiTelemetryRating('JD vs CV Match', 4)" class="px-2 py-0.5 bg-white border border-[#3A3A38]/30 text-[#1A3C2B] text-xs cursor-pointer">4</button>
+                    <button onclick="submitAiTelemetryRating('JD vs CV Match', 5)" class="px-2 py-0.5 bg-[#9EFFBF] border border-[#1A3C2B] text-[#1A3C2B] font-bold text-xs cursor-pointer">5 ★</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE 2: AI CV POLISHER & CORPORATE PRESENTATION PREP -->
+          <div id="pane-cv-prep" class="studio-pane space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4 hairline-b pb-4">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-[#1A3C2B] m-0 font-mono-tech uppercase">AI CV Polisher &amp; Corporate Presentation</h2>
+                <p class="text-xs text-[#3A3A38] m-0 mt-1">Perapih kalimat pengalaman kerja &amp; cetak CV berstandar ATS</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button id="subtab-btn-cv" class="px-4 py-2 text-xs font-semibold bg-slate-900 text-white transition" onclick="switchCvSubTab('cv-polisher')">
+                  AI CV Polisher &amp; ATS PDF
+                </button>
+                <button id="subtab-btn-pres" class="px-4 py-2 text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" onclick="switchCvSubTab('corp-presentation')">
+                  Corporate Presentation Prep
+                </button>
+              </div>
+            </div>
+
+            <div id="subview-cv-polisher" class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+              <div class="lg:col-span-6 space-y-4">
+                <div class="pb-3 hairline-b flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <div class="tech-meta font-bold text-[#1A3C2B]">AI Perapih Pengalaman Kerja</div>
+                    <div class="text-xs text-[#3A3A38]">Sisa Kuota Polish: <strong id="cv-polish-credits-label" class="font-mono-tech text-[#1A3C2B]">1</strong></div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button class="btn-ghost-bp bg-white" onclick="openQrisCheckout({ title: 'Paket AI CV Preparation (5x Polish + 10x JD Match)', price: 49000, type: 'cv-pack', allowOrderBump: true })">
+                      Top-Up (Rp 49k)
+                    </button>
+                    <button class="btn-forest" onclick="runAiCvPolish()">
+                      Polish dengan AI →
+                    </button>
+                  </div>
+                </div>
+                <div id="cv-polisher-comparison"></div>
+              </div>
+
+              <div class="lg:col-span-6 space-y-4 lg:border-l lg:border-[#3A3A38]/20 lg:pl-8">
+                <div class="flex items-center justify-between pb-3 hairline-b">
+                  <span class="tech-meta font-bold text-[#1A3C2B]">Preview CV Standar ATS</span>
+                  <button class="btn-ghost-bp bg-white" onclick="window.print()">
+                    Cetak / Unduh PDF
+                  </button>
+                </div>
+                <div id="ats-cv-printable" class="p-5 sm:p-6 bg-white border border-[#3A3A38]/40 space-y-4 text-xs leading-relaxed">
+                  <div class="hairline-b pb-3 text-center">
+                    <h3 class="text-base font-bold uppercase tracking-wide m-0 text-[#1A3C2B] font-mono-tech">RAKA PRATAMA, S.Kom.</h3>
+                    <div class="text-xs font-mono-tech text-[#3A3A38] mt-1">
+                      Jakarta, Indonesia • raka.pratama@email.com • linkedin.com/in/rakapratama
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-mono-tech font-bold uppercase text-xs text-[#1A3C2B] hairline-b pb-1 mb-2">Pengalaman Magang &amp; Organisasi</div>
+                    <div class="space-y-3">
+                      <div>
+                        <div class="flex flex-wrap justify-between font-semibold text-[#1A3C2B] gap-1">
+                          <span>Staf Magang IT Governance — PT Nusantara Digital</span>
+                          <span class="font-mono-tech text-xs text-[#3A3A38]">Feb – Jun 2026</span>
+                        </div>
+                        <ul id="ats-preview-bullets-1" class="list-disc pl-4 mt-1 space-y-1 text-[#3A3A38]"></ul>
+                      </div>
+                      <div>
+                        <div class="flex flex-wrap justify-between font-semibold text-[#1A3C2B] gap-1">
+                          <span>Koordinator Divisi Riset &amp; Data — Himpunan Mahasiswa</span>
+                          <span class="font-mono-tech text-xs text-[#3A3A38]">Agu 2025 – Jan 2026</span>
+                        </div>
+                        <ul id="ats-preview-bullets-2" class="list-disc pl-4 mt-1 space-y-1 text-[#3A3A38]"></ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="subview-corp-presentation" style="display: none;" class="space-y-4">
+              <div class="pb-4 hairline-b flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h3 class="text-sm font-bold text-[#1A3C2B] m-0 font-mono-tech uppercase">Corporate Presentation Preparation Kit</h3>
+                  <p class="text-xs text-[#3A3A38] m-0 mt-1">Struktur slide Piramida Minto, MECE, &amp; 30-60-90 Day Plan untuk tahap Case Study Interview.</p>
+                </div>
+                <button class="btn-forest" onclick="openQrisCheckout({ title: 'Corporate Presentation Preparation Kit', price: 59000, type: 'product', productId: 'corp-pres', allowOrderBump: true })">
+                  Beli Paket — Rp 59.000
+                </button>
+              </div>
+              <div id="corp-slides-container"></div>
+            </div>
+          </div>
+
+          <!-- PANE 3: JOB-READY TOOLKITS & TEMPLATES -->
+          <div id="pane-toolkits" class="studio-pane space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-3 hairline-b pb-4">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-[#1A3C2B] m-0 font-mono-tech uppercase">Job-Ready Case Kits &amp; Operational Templates</h2>
+                <p class="text-xs text-[#3A3A38] m-0 mt-1">Sekali Beli • Akses selamanya untuk portofolio &amp; dokumen operasional kerja</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button class="catalog-filter-btn px-3.5 py-1.5 text-xs font-semibold bg-slate-900 text-white transition" data-cat="all" onclick="filterCatalog('all')">Semua (6)</button>
+                <button class="catalog-filter-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-cat="toolkit" onclick="filterCatalog('toolkit')">Job-Ready Kits</button>
+                <button class="catalog-filter-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-cat="template" onclick="filterCatalog('template')">Template PMO/ITSM/Tracker</button>
+                <button class="catalog-filter-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-cat="service" onclick="filterCatalog('service')">Human Review</button>
+              </div>
+            </div>
+            <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+          </div>
+
+          <!-- PANE 4: JOB APPLICATION TRACKER -->
+          <div id="pane-tracker" class="studio-pane space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-3 hairline-b pb-4">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-[#1A3C2B] m-0 font-mono-tech uppercase">Job Application Tracker &amp; Checklist</h2>
+                <p class="text-xs text-[#3A3A38] m-0 mt-1">Klik badge status pada tabel untuk mengubah tahapan seleksi</p>
+              </div>
+              <button class="btn-forest" onclick="openAddApplicationModal()">
+                + Tambah Lamaran
+              </button>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <button class="tracker-filter-btn px-3.5 py-1.5 text-xs font-semibold bg-slate-900 text-white transition" data-status="all" onclick="filterTracker('all')">Semua Status</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="wishlist" onclick="filterTracker('wishlist')">Wishlist</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="applied" onclick="filterTracker('applied')">Applied</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="hr_interview" onclick="filterTracker('hr_interview')">HR Interview</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="user_interview" onclick="filterTracker('user_interview')">User Interview</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="offer" onclick="filterTracker('offer')">Offer Letter</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="rejected" onclick="filterTracker('rejected')">Rejected</button>
+            </div>
+
+            <div class="overflow-x-auto bg-white border border-[#3A3A38]/30">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="hairline-b bg-[#F7F7F5] font-mono-tech text-[10px] uppercase tracking-wider text-[#1A3C2B]">
+                    <th class="py-3 px-3">ID</th>
+                    <th class="py-3 px-3">Perusahaan</th>
+                    <th class="py-3 px-3">Posisi</th>
+                    <th class="py-3 px-3">Status</th>
+                    <th class="py-3 px-3">Skor CV</th>
+                    <th class="py-3 px-3">Tanggal</th>
+                    <th class="py-3 px-3">Langkah Berikutnya</th>
+                  </tr>
+                </thead>
+                <tbody id="tracker-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- PANE 5: USER INTERVIEW MOCK UP -->
+          <div id="pane-interview" class="studio-pane space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-3 hairline-b pb-4">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-[#1A3C2B] m-0 font-mono-tech uppercase">User Interview Simulator &amp; Evaluasi STAR</h2>
+                <p class="text-xs text-[#3A3A38] m-0 mt-1">Latihan tanya-jawab via suara (Voice-to-Text) dengan penilaian terstruktur</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button class="interview-role-btn px-3.5 py-1.5 text-xs font-semibold bg-slate-900 text-white transition" data-role="it-grc" onclick="selectInterviewRole('it-grc')">IT GRC &amp; Audit</button>
+                <button class="interview-role-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-role="data-analyst" onclick="selectInterviewRole('data-analyst')">Data Analyst</button>
+                <button class="interview-role-btn px-3.5 py-1.5 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-role="pmo" onclick="selectInterviewRole('pmo')">PMO / IT Project</button>
+                <button id="btn-interview-membership" onclick="openQrisCheckout({ title: 'Membership Mock Interview (20 Sesi + 30x CV Match / bln)', price: 49000, type: 'membership', allowOrderBump: false })" class="px-3.5 py-1.5 text-xs font-mono-tech font-bold bg-[#9EFFBF] text-[#1A3C2B] border border-[#1A3C2B] cursor-pointer">
+                  Langganan Rp 49k/bln
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+              <div class="lg:col-span-6 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 hairline-b">
+                  <div class="flex items-center gap-1.5">
+                    <button id="q-step-btn-0" onclick="selectInterviewQuestion(0)" class="px-3 py-1 text-xs font-semibold bg-slate-900 text-white cursor-pointer border-0">Soal #1 (Teknis)</button>
+                    <button id="q-step-btn-1" onclick="selectInterviewQuestion(1)" class="px-3 py-1 text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer border-0">Soal #2 (STAR)</button>
+                  </div>
+                  <div class="flex items-center gap-2 text-xs font-mono-tech">
+                    <span id="interview-timer-display" class="font-bold text-[#1A3C2B] px-2 py-0.5 bg-white border border-[#3A3A38]/30">02:00</span>
+                    <button id="interview-timer-btn" onclick="toggleInterviewTimer()" class="text-xs font-bold text-[#1A3C2B] hover:underline bg-transparent border-0 cursor-pointer p-0">Mulai Timer</button>
+                  </div>
+                </div>
+
+                <h3 id="interview-q-text" class="text-sm font-bold text-[#1A3C2B] leading-relaxed m-0"></h3>
+                <div class="tech-meta font-bold text-[#1A3C2B] bg-[#F4D35E] inline-block px-2 py-0.5" id="interview-q-type">Technical Case</div>
+
+                <div class="py-3 hairline-t hairline-b text-xs">
+                  <strong class="font-mono-tech text-[#1A3C2B] uppercase">Fokus Penilaian Penguji:</strong>
+                  <div id="interview-q-rubric" class="text-[#3A3A38] mt-1"></div>
+                </div>
+
+                <div class="space-y-2 pt-1">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <label for="interview-answer-input" class="tech-meta font-bold text-[#1A3C2B]">Jawaban Anda (<span id="interview-word-count" class="font-mono-tech font-normal text-[#3A3A38]">0 / 300 kata</span>):</label>
+                    <button class="btn-ghost-bp bg-white py-1 px-2.5" onclick="simulateSpeechToText()">
+                      ● Simulasi Bicara (Voice-to-Text)
+                    </button>
+                  </div>
+                  <textarea id="interview-answer-input" rows="4" oninput="enforceInterviewWordCap()" placeholder="Klik 'Simulasi Bicara' atau ketik jawaban Anda (maks 300 kata)..." class="w-full p-3.5 bg-white border border-[#3A3A38]/40 text-xs text-[#1A3C2B] font-mono-tech focus:outline-none leading-relaxed"></textarea>
+                </div>
+
+                <button class="w-full btn-forest py-3.5" onclick="evaluateInterviewAnswer()">
+                  Evaluasi Jawaban dengan Rubrik STAR →
+                </button>
+              </div>
+
+              <div class="lg:col-span-6 lg:border-l lg:border-[#3A3A38]/20 lg:pl-8">
+                <div id="interview-empty-box" class="h-full min-h-[220px] flex flex-col items-center justify-center p-6 text-center text-xs text-[#3A3A38] bg-white border border-[#3A3A38]/20">
+                  <strong class="font-mono-tech text-[#1A3C2B] text-sm uppercase">Siap Menguji Jawaban Anda?</strong>
+                  <p class="max-w-xs mt-1">Pilih Soal #1 atau #2, klik <strong>Simulasi Bicara</strong>, lalu tekan <strong>Evaluasi Jawaban</strong>.</p>
+                </div>
+
+                <div id="interview-evaluation-box" class="space-y-4" style="display: none;">
+                  <div class="flex flex-wrap items-center justify-between gap-2 hairline-b pb-3">
+                    <div>
+                      <div class="tech-meta text-[#3A3A38]">Skor Kesiapan Jawaban</div>
+                      <div id="ev-overall-score" class="text-2xl font-bold font-mono-tech text-[#1A3C2B]">82/100</div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span id="ev-readiness-badge" class="px-3 py-1 text-xs font-semibold bg-[#9EFFBF] text-[#1A3C2B]">Siap Interview</span>
+                      <button onclick="openScoreCardModal('interview')" class="px-2.5 py-1 bg-white border border-[#3A3A38]/40 text-[#1A3C2B] font-mono-tech text-[10px] font-bold cursor-pointer">
+                        Kartu Skor ↗
+                      </button>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-3 gap-4 text-center text-xs font-mono-tech py-2 hairline-b bg-white">
+                    <div>
+                      <div class="text-[#3A3A38] text-[10px]">STAR Method</div>
+                      <strong id="ev-star-score" class="text-sm text-[#1A3C2B]">85%</strong>
+                    </div>
+                    <div>
+                      <div class="text-[#3A3A38] text-[10px]">Teknis</div>
+                      <strong id="ev-tech-score" class="text-sm text-[#1A3C2B]">84%</strong>
+                    </div>
+                    <div>
+                      <div class="text-[#3A3A38] text-[10px]">Komunikasi</div>
+                      <strong id="ev-comm-score" class="text-sm text-[#1A3C2B]">78%</strong>
+                    </div>
+                  </div>
+                  <div class="text-xs space-y-1">
+                    <strong class="font-mono-tech text-[#1A3C2B] uppercase">Poin Kuat Jawaban Anda:</strong>
+                    <ul id="ev-strengths-list" class="list-disc pl-4 space-y-1 text-[#3A3A38]"></ul>
+                  </div>
+                  <div class="text-xs space-y-1">
+                    <strong class="font-mono-tech text-[#1A3C2B] uppercase">Yang Perlu Ditambahkan:</strong>
+                    <ul id="ev-improvements-list" class="list-disc pl-4 space-y-1 text-[#3A3A38]"></ul>
+                  </div>
+                  <div class="p-3.5 bg-white border-l-4 border-[#1A3C2B] text-xs space-y-1">
+                    <strong class="font-mono-tech text-[#1A3C2B] uppercase">Contoh Jawaban Ideal:</strong>
+                    <p id="ev-model-answer" class="m-0 italic text-[#3A3A38] leading-relaxed"></p>
+                  </div>
+                  <div class="p-3.5 bg-[#F4D35E]/30 border border-[#1A3C2B] text-xs space-y-1">
+                    <strong class="font-mono-tech text-[#1A3C2B] uppercase">Pertanyaan Lanjutan Penguji:</strong>
+                    <p id="ev-followup-question" class="m-0 text-[#1A3C2B] leading-relaxed"></p>
+                  </div>
+
+                  <div class="pt-2 hairline-t flex flex-wrap items-center justify-between gap-2 text-xs font-mono-tech text-[#3A3A38]">
+                    <span>Apakah evaluasi ini membantu?</span>
+                    <div class="flex items-center gap-1">
+                      <button onclick="submitAiTelemetryRating('Evaluasi Interview', 4)" class="px-2 py-0.5 bg-white border border-[#3A3A38]/30 text-[#1A3C2B] text-xs cursor-pointer">4</button>
+                      <button onclick="submitAiTelemetryRating('Evaluasi Interview', 5)" class="px-2 py-0.5 bg-[#9EFFBF] border border-[#1A3C2B] text-[#1A3C2B] font-bold text-xs cursor-pointer">5 ★</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- CLEAN FOOTER (Removed // and Hex Code Notes)                          -->
+  <!-- ===================================================================== -->
+  <footer class="bg-[#1A3C2B] text-[#F7F7F5] py-12 px-6 text-xs font-mono-tech">
+    <div class="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 mb-8">
+      <div class="space-y-2">
+        <div class="text-[#9EFFBF] font-bold uppercase">Produk Inti</div>
+        <div><button onclick="selectProductFromSubMenu('jd-match')" class="text-[#F7F7F5]/80 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left font-mono-tech">JD vs CV Match</button></div>
+        <div><button onclick="selectProductFromSubMenu('cv-prep', 'cv-polisher')" class="text-[#F7F7F5]/80 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left font-mono-tech">AI CV Polisher</button></div>
+        <div><button onclick="selectProductFromSubMenu('cv-prep', 'corp-presentation')" class="text-[#F7F7F5]/80 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left font-mono-tech">Corporate Presentation</button></div>
+        <div><button onclick="selectProductFromSubMenu('interview')" class="text-[#F7F7F5]/80 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left font-mono-tech">User Interview Mock Up</button></div>
+      </div>
+      <div class="space-y-2">
+        <div class="text-[#9EFFBF] font-bold uppercase">Job-Ready Toolkits</div>
+        <div><button onclick="selectProductFromSubMenu('toolkits', 'toolkit')" class="text-[#F7F7F5]/80 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left font-mono-tech">Data Analyst Kit</button></div>
+        <div><button onclick="selectProductFromSubMenu('toolkits', 'toolkit')" class="text-[#F7F7F5]/80 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left font-mono-tech">IT GRC ISO 27001 Kit</button></div>
+        <div><button onclick="selectProductFromSubMenu('toolkits', 'template')" class="text-[#F7F7F5]/80 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left font-mono-tech">Template PMO &amp; ITSM</button></div>
+        <div><button onclick="selectProductFromSubMenu('tracker')" class="text-[#F7F7F5]/80 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left font-mono-tech">Application Tracker</button></div>
+      </div>
+      <div class="space-y-2">
+        <div class="text-[#9EFFBF] font-bold uppercase">Keamanan &amp; Arsitektur</div>
+        <div class="text-[#F7F7F5]/80">Go API + PostgreSQL</div>
+        <div class="text-[#F7F7F5]/80">Next.js + Flutter</div>
+        <div class="text-[#F7F7F5]/80">PII Scrubber (UU PDP)</div>
+      </div>
+      <div class="space-y-2">
+        <div class="text-[#9EFFBF] font-bold uppercase">Navigasi Demo</div>
+        <div><button onclick="claimCampusReferral()" class="text-[#F7F7F5]/80 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left font-mono-tech">Referral Kampus (+2 Kuota)</button></div>
+        <div><button onclick="openScoreCardModal('jd-match')" class="text-[#F7F7F5]/80 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left font-mono-tech">Kartu Skor Kesiapan</button></div>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto border-t border-[#F7F7F5]/20 pt-6 flex flex-wrap items-center justify-between gap-4">
+      <div class="font-bold">Test App — Career Launchpad</div>
+      <div class="text-[#F7F7F5]/70">© 2026 Test App Prototype.</div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MODALS (1px Wireframe Borders, Zero Shadows, Clean Labels)            -->
+  <!-- ===================================================================== -->
+  <div id="modal-qris-checkout" class="modal-backdrop">
+    <div class="bg-[#F7F7F5] border border-[#1A3C2B] max-w-xs sm:max-w-sm w-full p-5 space-y-3.5 relative">
+      <span class="corner-marker corner-tl"></span>
+      <span class="corner-marker corner-tr"></span>
+      <span class="corner-marker corner-bl"></span>
+      <span class="corner-marker corner-br"></span>
+
+      <div class="flex items-start justify-between gap-2 hairline-b pb-2.5">
+        <div>
+          <h3 id="qris-item-title" class="text-xs font-bold text-[#1A3C2B] m-0 font-mono-tech uppercase">Paket 5x Kuota CV Match</h3>
+          <div class="text-[10px] font-mono-tech font-bold text-[#1A3C2B] bg-[#9EFFBF] inline-block px-1.5 py-0.5 mt-1">QRIS Dinamis • TEST APP OFFICIAL</div>
+        </div>
+        <button class="px-2 py-0.5 bg-white border border-[#3A3A38]/40 text-[#1A3C2B] text-xs font-mono-tech font-bold cursor-pointer" onclick="closeModals()">✕</button>
+      </div>
+
+      <div class="flex items-center gap-3.5 py-1">
+        <div class="w-24 h-24 shrink-0 border-2 border-[#1A3C2B] p-2 grid grid-cols-5 gap-1 bg-white">
+          <div class="bg-[#1A3C2B] col-span-2 row-span-2"></div>
+          <div class="bg-[#1A3C2B]"></div>
+          <div class="bg-[#1A3C2B] col-span-2 row-span-2"></div>
+          <div class="bg-[#1A3C2B]"></div>
+          <div class="bg-[#1A3C2B] col-span-3"></div>
+          <div class="bg-[#1A3C2B]"></div>
+          <div class="bg-[#1A3C2B]"></div>
+          <div class="bg-[#1A3C2B] col-span-2"></div>
+          <div class="bg-[#1A3C2B]"></div>
+          <div class="bg-[#1A3C2B] col-span-2 row-span-2"></div>
+          <div class="bg-[#1A3C2B]"></div>
+          <div class="bg-[#1A3C2B] col-span-2"></div>
+        </div>
+        <div class="text-xs space-y-1">
+          <div class="font-bold text-[#1A3C2B] font-mono-tech">Scan QRIS Instan</div>
+          <p class="text-[11px] text-[#3A3A38] m-0 leading-snug">
+            Mendukung BCA, Mandiri, GoPay, OVO, DANA, ShopeePay. Nominal otomatis.
+          </p>
+        </div>
+      </div>
+
+      <label id="qris-bump-wrapper" class="p-3 bg-[#F4D35E]/40 border border-[#1A3C2B] flex items-start gap-2 cursor-pointer text-xs">
+        <input id="qris-bump-checkbox" type="checkbox" class="mt-0.5" onchange="toggleOrderBump(this)" />
+        <div class="leading-snug">
+          <strong class="text-[#1A3C2B] font-mono-tech">+Rp 15.000:</strong> <span class="text-[#3A3A38]">Tambah Template Tracker Lamaran Kerja &amp; Checklist Interview.</span>
+        </div>
+      </label>
+
+      <div class="flex items-center justify-between hairline-t pt-3">
+        <div>
+          <div class="text-[10px] font-mono-tech text-[#3A3A38]">Total Tagihan:</div>
+          <div id="qris-total-amount" class="text-base font-bold font-mono-tech text-[#1A3C2B]">Rp 29.000</div>
+        </div>
+        <button class="btn-forest" onclick="simulateQrisPaymentSuccess()">
+          Simulasikan Lunas →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: PREVIEW ISI TOOLKIT -->
+  <div id="modal-toolkit-preview" class="modal-backdrop">
+    <div class="bg-[#F7F7F5] border border-[#1A3C2B] max-w-md w-full p-5 space-y-3.5">
+      <div class="flex items-center justify-between hairline-b pb-2.5">
+        <div>
+          <h3 id="preview-modal-title" class="text-sm font-bold text-[#1A3C2B] font-mono-tech m-0"></h3>
+          <div class="text-[10px] font-mono-tech font-bold text-[#1A3C2B] mt-0.5">Cuplikan Deliverable</div>
+        </div>
+        <button class="px-2 py-0.5 bg-white border border-[#3A3A38]/40 text-[#1A3C2B] text-xs font-mono-tech font-bold cursor-pointer" onclick="closeModals()">✕</button>
+      </div>
+      <div id="preview-modal-subtitle" class="text-xs font-semibold text-[#1A3C2B] font-mono-tech"></div>
+      <div id="preview-modal-table" class="space-y-1 bg-white p-3 border border-[#3A3A38]/20"></div>
+      <div class="flex justify-end hairline-t pt-2.5">
+        <button class="btn-forest" onclick="closeModals()">Tutup Preview</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: SHAREABLE SCORECARD -->
+  <div id="modal-score-card" class="modal-backdrop">
+    <div class="bg-[#F7F7F5] border border-[#1A3C2B] max-w-sm w-full p-5 space-y-4">
+      <div class="flex items-start justify-between gap-2 hairline-b pb-2.5">
+        <div>
+          <h3 class="text-sm font-bold text-[#1A3C2B] font-mono-tech m-0 uppercase">Kartu Skor Kesiapan Karir</h3>
+          <div class="text-[10px] font-mono-tech text-[#3A3A38] mt-0.5">Shareable ke LinkedIn &amp; Instagram Story</div>
+        </div>
+        <button class="px-2 py-0.5 bg-white border border-[#3A3A38]/40 text-[#1A3C2B] text-xs font-mono-tech font-bold cursor-pointer" onclick="closeModals()">✕</button>
+      </div>
+
+      <div class="p-4 bg-white border border-[#1A3C2B] space-y-3">
+        <div class="flex items-center justify-between text-xs font-mono-tech">
+          <span class="font-bold text-[#1A3C2B]">Test App Career Launchpad</span>
+          <span id="scorecard-badge-pill" class="px-2 py-0.5 bg-[#9EFFBF] text-[#1A3C2B] font-bold text-[10px]">VERIFIED READY</span>
+        </div>
+        <div class="py-2.5 hairline-t hairline-b flex items-baseline justify-between gap-2">
+          <div>
+            <div class="text-[10px] font-mono-tech text-[#3A3A38]">Kandidat</div>
+            <div class="text-sm font-bold text-[#1A3C2B] font-mono-tech mt-0.5">Raka Pratama, S.Kom.</div>
+            <div id="scorecard-role-title" class="text-xs text-[#1A3C2B] font-semibold">Junior IT GRC &amp; Internal Audit</div>
+          </div>
+          <div class="text-right">
+            <div id="scorecard-metric-value" class="text-2xl font-bold font-mono-tech text-[#1A3C2B]">89%</div>
+            <div id="scorecard-metric-label" class="text-[10px] font-mono-tech text-[#3A3A38]">ATS &amp; Case Ready</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between gap-2 pt-1">
+        <button onclick="shareScoreCard('LinkedIn')" class="flex-1 btn-forest">
+          Bagikan LinkedIn
+        </button>
+        <button onclick="shareScoreCard('Instagram Story')" class="flex-1 btn-ghost-bp bg-white">
+          Unduh IG Story
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 4: ADD APPLICATION -->
+  <div id="modal-add-application" class="modal-backdrop">
+    <div class="bg-[#F7F7F5] border border-[#1A3C2B] max-w-sm w-full p-5 space-y-4">
+      <div class="flex items-start justify-between gap-2 hairline-b pb-2.5">
+        <div>
+          <h3 class="text-sm font-bold text-[#1A3C2B] font-mono-tech m-0 uppercase">Tambah Lamaran Kerja</h3>
+          <div class="text-[10px] font-mono-tech text-[#3A3A38] mt-0.5">Catat perusahaan tujuan &amp; tahapan seleksi</div>
+        </div>
+        <button class="px-2 py-0.5 bg-white border border-[#3A3A38]/40 text-[#1A3C2B] text-xs font-mono-tech font-bold cursor-pointer" onclick="closeModals()">✕</button>
+      </div>
+
+      <form onsubmit="submitNewApplication(event)" class="space-y-3 text-xs">
+        <div class="space-y-1">
+          <label for="input-app-company" class="tech-meta font-bold text-[#1A3C2B] block">Nama Perusahaan</label>
+          <input id="input-app-company" type="text" required maxlength="80" value="PT Bank Mandiri Taspen" class="w-full p-2.5 bg-white border border-[#3A3A38]/40 text-xs font-mono-tech text-[#1A3C2B] focus:outline-none" />
+        </div>
+
+        <div class="space-y-1">
+          <label for="input-app-role" class="tech-meta font-bold text-[#1A3C2B] block">Posisi yang Dilamar</label>
+          <input id="input-app-role" type="text" required maxlength="80" value="Junior IT Governance & Audit" class="w-full p-2.5 bg-white border border-[#3A3A38]/40 text-xs font-mono-tech text-[#1A3C2B] focus:outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <div class="space-y-1">
+            <label for="input-app-track" class="tech-meta font-bold text-[#1A3C2B] block">Jalur Karir</label>
+            <select id="input-app-track" class="w-full p-2.5 bg-white border border-[#3A3A38]/40 text-xs font-mono-tech text-[#1A3C2B] focus:outline-none">
+              <option value="IT GRC">IT GRC &amp; Audit</option>
+              <option value="Data Analyst">Data Analyst</option>
+              <option value="PMO / ITSM">PMO / ITSM</option>
+            </select>
+          </div>
+          <div class="space-y-1">
+            <label for="input-app-status" class="tech-meta font-bold text-[#1A3C2B] block">Status</label>
+            <select id="input-app-status" class="w-full p-2.5 bg-white border border-[#3A3A38]/40 text-xs font-mono-tech text-[#1A3C2B] focus:outline-none">
+              <option value="applied">Applied</option>
+              <option value="wishlist">Wishlist</option>
+              <option value="hr_interview">HR Interview</option>
+              <option value="user_interview">User Interview</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <label for="input-app-next" class="tech-meta font-bold text-[#1A3C2B] block">Langkah Berikutnya</label>
+          <input id="input-app-next" type="text" maxlength="120" value="Latihan simulasi pertanyaan di modul Mock Interview" class="w-full p-2.5 bg-white border border-[#3A3A38]/40 text-xs font-mono-tech text-[#1A3C2B] focus:outline-none" />
+        </div>
+
+        <div class="flex items-center justify-end gap-2 hairline-t pt-3">
+          <button type="button" onclick="closeModals()" class="btn-ghost-bp bg-white">Batal</button>
+          <button type="submit" class="btn-forest">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Reuse the exact same mock-data.js & app.js so all 5 products work identically -->
+  <script src="js/mock-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

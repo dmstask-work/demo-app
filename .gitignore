@@ -1,0 +1,13 @@
+# Ignore everything by default
+/*
+
+# Allow prototypes and asset folders
+!/index.html
+!/index-blueprint.html
+!/css/
+!/css/**
+!/js/
+!/js/**
+
+# Allow this .gitignore itself
+!.gitignore

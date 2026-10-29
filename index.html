@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test App — The Fastest Way for Fresh Grads to Land Any Career</title>
+  <!-- Google Fonts: Newsreader (Editorial Display) + Public Sans (Unified UI & Tabular Data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Equals Reference + Impeccable Audited Styling -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-xs sm:max-w-sm"></div>
+
+  <!-- Floating Prototype Switcher (1-Click UX Switcher) -->
+  <div class="fixed bottom-4 left-4 z-50 flex items-center gap-1 p-1 rounded-full bg-slate-900/95 text-white shadow-lg border border-slate-700/80 backdrop-blur-sm text-xs">
+    <span class="px-3 py-1.5 rounded-full bg-emerald-600 text-white font-bold">Tema 1: Editorial</span>
+    <a href="index-blueprint.html" class="px-3 py-1.5 rounded-full text-slate-300 hover:text-white hover:bg-slate-800 font-semibold transition no-underline">Tema 2: Blueprint →</a>
+  </div>
+
+  <!-- 1. TOP CORAL ANNOUNCEMENT BAR (With Subtle Editorial Text Rotator) -->
+  <div class="top-announce-bar">
+    <button onclick="selectProductFromSubMenu('toolkits', 'all')" class="bg-transparent border-0 text-white p-0 cursor-pointer font-medium text-xs hover:underline">
+      <span id="announce-rotator-text" class="announce-text-stage">Baru: Job-Ready Case Kit (Data Analyst &amp; IT GRC ISO 27001) + AI CV Match kini hadir dengan pembayaran QRIS Instan →</span>
+    </button>
+  </div>
+
+  <!-- 2. STICKY NAVBAR DENGAN SUB-MENU "PRODUCTS" & POJOK KANAN USER ACCOUNT -->
+  <header id="main-navbar" class="navbar-glass sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto h-16 flex items-center justify-between gap-3">
+      <!-- Brand Logo (Returns to Landing Page) -->
+      <button onclick="switchMainPage('landing')" class="flex items-center gap-2.5 text-slate-900 bg-transparent border-0 cursor-pointer p-0" title="Kembali ke Halaman Utama">
+        <span class="w-7 h-7 rounded bg-slate-900 text-white inline-flex items-center justify-center font-bold text-xs font-mono-num">
+          =
+        </span>
+        <span class="font-bold text-sm tracking-tight">Test App</span>
+      </button>
+
+      <!-- Desktop Navigation (Cleaned: No redundant Overview / Interactive Studio buttons) -->
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-700">
+        <!-- PRODUCTS DROPDOWN SUB-MENU -->
+        <div id="products-dropdown-wrapper" class="nav-dropdown-wrapper">
+          <button onclick="toggleProductsDropdown(event)" class="flex items-center gap-1.5 py-2 px-2 text-slate-700 hover:text-slate-950 transition cursor-pointer bg-transparent border-0 font-semibold text-xs">
+            <span>Products</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+
+          <!-- ANIMATED MEGA SUB-MENU (Opens Dedicated Studio Tab Page) -->
+          <div class="nav-dropdown-menu">
+            <div class="px-3 pb-2.5 flex items-center justify-between border-b border-slate-100 mb-2">
+              <span class="text-xs font-bold text-slate-500">5 Katalog Produk Inti Test App</span>
+              <span class="text-xs font-mono-num text-emerald-700 font-semibold">Buka di Studio →</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              <button class="submenu-item" onclick="selectProductFromSubMenu('jd-match')">
+                <div class="submenu-icon" style="background: #E0F2FE; color: #0369A1;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span>JD vs CV Match</span>
+                    <span class="text-amber-700 font-mono-num">Per-Try</span>
+                  </div>
+                  <p class="text-xs text-slate-500 m-0 mt-0.5 leading-snug">Cek persentase kecocokan CV dengan loker &amp; analisis skill gap.</p>
+                </div>
+              </button>
+
+              <button class="submenu-item" onclick="selectProductFromSubMenu('cv-prep', 'cv-polisher')">
+                <div class="submenu-icon" style="background: #FEF3C7; color: #B45309;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span>AI CV Preparation</span>
+                    <span class="text-slate-500 font-mono-num">One-Time</span>
+                  </div>
+                  <p class="text-xs text-slate-500 m-0 mt-0.5 leading-snug">Formatting CV ATS &amp; AI Agent perapih kalimat pengalaman kerja.</p>
+                </div>
+              </button>
+
+              <button class="submenu-item" onclick="selectProductFromSubMenu('cv-prep', 'corp-presentation')">
+                <div class="submenu-icon" style="background: #DCFCE7; color: #15803D;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span>Corporate Presentation</span>
+                    <span class="text-slate-500 font-mono-num">One-Time</span>
+                  </div>
+                  <p class="text-xs text-slate-500 m-0 mt-0.5 leading-snug">Panduan &amp; template slide studi kasus interview standar korporat.</p>
+                </div>
+              </button>
+
+              <button class="submenu-item" onclick="selectProductFromSubMenu('toolkits', 'all')">
+                <div class="submenu-icon" style="background: #CCFBF1; color: #0F766E;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span>Toolkits &amp; Templates</span>
+                    <span class="text-emerald-700 font-mono-num">Rp29k–199k</span>
+                  </div>
+                  <p class="text-xs text-slate-500 m-0 mt-0.5 leading-snug">Case Kit IT GRC, Data Analyst, serta template PMO, ITSM &amp; Tracker.</p>
+                </div>
+              </button>
+
+              <button class="submenu-item" onclick="selectProductFromSubMenu('interview')">
+                <div class="submenu-icon" style="background: #FFE4E6; color: #BE123C;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span>User Interview Mock Up</span>
+                    <span class="text-rose-700 font-mono-num">Membership</span>
+                  </div>
+                  <p class="text-xs text-slate-500 m-0 mt-0.5 leading-snug">Simulasi interview interaktif (Voice-to-Text) &amp; evaluasi metode STAR.</p>
+                </div>
+              </button>
+
+              <button class="submenu-item" onclick="selectProductFromSubMenu('tracker')">
+                <div class="submenu-icon" style="background: #F1F5F9; color: #334155;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <span>Job Application Tracker</span>
+                    <span class="text-slate-500 font-mono-num">Lead Magnet</span>
+                  </div>
+                  <p class="text-xs text-slate-500 m-0 mt-0.5 leading-snug">Papan pelacak status lamaran kerja &amp; checklist persiapan H-1 interview.</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="switchMainPage('landing', 'connected-funnel')" class="text-slate-700 hover:text-slate-950 font-semibold bg-transparent border-0 cursor-pointer text-xs">
+          Alur Produk
+        </button>
+        <button onclick="switchMainPage('landing', 'wall-of-love')" class="text-slate-700 hover:text-slate-950 font-semibold bg-transparent border-0 cursor-pointer text-xs">
+          Testimonials
+        </button>
+        <button onclick="switchMainPage('landing', 'pricing-section')" class="text-slate-700 hover:text-slate-950 font-semibold bg-transparent border-0 cursor-pointer text-xs">
+          Pricing
+        </button>
+      </nav>
+
+      <!-- Right Actions: Coba Studio + Top-Right User Detail & Quota Popover -->
+      <div class="flex items-center gap-2">
+        <button class="btn-pill-emerald" onclick="selectProductFromSubMenu('jd-match')">
+          Coba Studio →
+        </button>
+
+        <!-- User Account Icon Button (Top Right Corner — Icon Only) -->
+        <div id="user-account-wrapper" class="user-account-wrapper">
+          <button onclick="toggleUserAccountMenu(event)" aria-label="Profil dan Kuota Akun" title="Profil &amp; Kuota" class="w-8 h-8 rounded-full bg-white hover:bg-slate-100 border border-slate-300/90 text-slate-900 inline-flex items-center justify-center transition cursor-pointer p-0">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+
+          <!-- Dropdown Detail User & Dompet Kuota (Muncul Saat Diklik) -->
+          <div class="user-account-menu text-left">
+            <div class="pb-2.5 border-b border-slate-200 flex items-center justify-between">
+              <div>
+                <div class="text-xs font-bold text-slate-900">Raka Pratama, S.Kom.</div>
+                <div class="text-[11px] text-slate-500">Fresh Graduate • Sistem Informasi</div>
+              </div>
+              <span id="user-plan-badge" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 text-[10px] font-semibold">Akun Trial</span>
+            </div>
+
+            <div class="py-2.5 border-b border-slate-200 space-y-2 text-xs">
+              <div class="text-[11px] font-bold text-slate-500">Sisa Kuota Anda</div>
+              <div class="flex items-center justify-between">
+                <span class="text-slate-600">Cek CV vs JD Match</span>
+                <strong id="studio-wallet-jd" class="font-mono-num text-slate-900">1x</strong>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-slate-600">AI CV Polisher</span>
+                <strong id="studio-wallet-cv" class="font-mono-num text-slate-900">1x</strong>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-slate-600">Simulasi Interview</span>
+                <strong id="studio-wallet-interview" class="font-mono-num text-slate-900">2 Sesi Trial</strong>
+              </div>
+            </div>
+
+            <div class="pt-2.5 space-y-1.5">
+              <button onclick="claimCampusReferral()" class="w-full py-2 px-3 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-950 font-semibold text-xs transition cursor-pointer border-0 text-left flex items-center justify-between">
+                <span>Ajak 2 Teman Kampus</span>
+                <span class="font-bold">+2 Kuota Gratis</span>
+              </button>
+              <button onclick="openScoreCardModal('jd-match')" class="w-full py-2 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold text-xs transition cursor-pointer border-0 text-left flex items-center justify-between">
+                <span>Kartu Skor Kesiapan Karir</span>
+                <span>↗</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button onclick="toggleMobileMenu()" class="md:hidden px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-bold text-slate-900 cursor-pointer">
+          Menu ▾
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer (Cleaned: No redundant Overview/Studio buttons) -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer md:hidden">
+      <div class="text-xs font-bold text-slate-500 mb-2">Pilih Produk (Buka di Studio):</div>
+      <div class="grid grid-cols-1 gap-1.5 text-xs">
+        <button onclick="selectProductFromSubMenu('jd-match')" class="py-2 px-3 rounded-lg bg-slate-50 text-left font-semibold text-slate-900 border-0">1. JD vs CV Match (Pay-Per-Try)</button>
+        <button onclick="selectProductFromSubMenu('cv-prep', 'cv-polisher')" class="py-2 px-3 rounded-lg bg-slate-50 text-left font-semibold text-slate-900 border-0">2. AI CV Preparation (One-Time)</button>
+        <button onclick="selectProductFromSubMenu('cv-prep', 'corp-presentation')" class="py-2 px-3 rounded-lg bg-slate-50 text-left font-semibold text-slate-900 border-0">3. Corporate Presentation Prep</button>
+        <button onclick="selectProductFromSubMenu('toolkits', 'all')" class="py-2 px-3 rounded-lg bg-slate-50 text-left font-semibold text-slate-900 border-0">4. Job-Ready Case Kits &amp; Templates</button>
+        <button onclick="selectProductFromSubMenu('interview')" class="py-2 px-3 rounded-lg bg-slate-50 text-left font-semibold text-slate-900 border-0">5. User Interview Mock Up (Membership)</button>
+        <button onclick="selectProductFromSubMenu('tracker')" class="py-2 px-3 rounded-lg bg-slate-50 text-left font-semibold text-slate-900 border-0">6. Job Application Tracker</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE VIEW 1: LANDING PAGE (Storytelling, Motion Window & Funnel)      -->
+  <!-- ===================================================================== -->
+  <div id="page-landing" class="page-view active">
+
+    <!-- 3. HERO SECTION DENGAN SCROLL-TRIGGERED MOTION GRAPHIC WINDOW -->
+    <section class="hero-editorial-section">
+      <div class="side-color-stripes">
+        <div class="h-3 w-full" style="background: #38BDF8;"></div>
+        <div class="h-3 w-full" style="background: #FACC15;"></div>
+        <div class="h-3 w-full" style="background: #F43F5E;"></div>
+        <div class="h-3 w-full" style="background: #10B981;"></div>
+      </div>
+
+      <div class="max-w-5xl mx-auto text-center relative z-10">
+        <h1 class="font-display text-3xl sm:text-6xl font-semibold text-slate-900 leading-[1.1] max-w-3xl mx-auto m-0">
+          The fastest way for fresh grads to land <span class="underline-sketch">any</span> career
+        </h1>
+        <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto mt-4 mb-7 leading-relaxed">
+          Dari bingung mau melamar apa menjadi siap melamar dan siap interview. Cek kecocokan CV vs JD, bangun portofolio studi kasus nyata, dan latihan interview dalam satu ekosistem.
+        </p>
+
+        <div class="mb-10 flex flex-wrap items-center justify-center gap-3">
+          <button class="btn-pill-white" onclick="selectProductFromSubMenu('jd-match')">
+            <span>Buka Interactive Studio Gratis</span>
+            <span class="text-emerald-700 font-bold">→</span>
+          </button>
+          <button class="btn-pill-white" onclick="switchMainPage('landing', 'connected-funnel')">
+            <span>Lihat Alur 5 Produk</span>
+          </button>
+        </div>
+
+        <!-- SCROLL-TRIGGERED MOTION GRAPHIC WINDOW (Point 1) -->
+        <div id="hero-motion-window" class="app-window-frame max-w-4xl mx-auto text-left">
+          <div class="window-yellow-banner flex flex-wrap items-center justify-between gap-2">
+            <span>Live Product Motion Storyboard — Bagaimana Test App Mengubah Peluang Karir Anda</span>
+            <span class="font-mono-num text-xs">Auto-Playing on Scroll</span>
+          </div>
+
+          <!-- 4-Stage Motion Graphic Stepper (Synchronized Progress Bars) -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 pb-4 border-b border-slate-200">
+            <button class="motion-step-btn active" onclick="selectHeroMotionStep(0)">
+              <div class="text-xs font-bold text-slate-900">01. Diagnosa CV vs JD</div>
+              <div class="text-[11px] text-slate-500">Deteksi missing keyword</div>
+              <div class="motion-bar-track"><div class="motion-bar-fill"></div></div>
+            </button>
+            <button class="motion-step-btn" onclick="selectHeroMotionStep(1)">
+              <div class="text-xs font-bold text-slate-900">02. AI CV & Presentation</div>
+              <div class="text-[11px] text-slate-500">Polish kalimat standar HR</div>
+              <div class="motion-bar-track"><div class="motion-bar-fill"></div></div>
+            </button>
+            <button class="motion-step-btn" onclick="selectHeroMotionStep(2)">
+              <div class="text-xs font-bold text-slate-900">03. Job-Ready Case Kit</div>
+              <div class="text-[11px] text-slate-500">Bangun bukti portofolio</div>
+              <div class="motion-bar-track"><div class="motion-bar-fill"></div></div>
+            </button>
+            <button class="motion-step-btn" onclick="selectHeroMotionStep(3)">
+              <div class="text-xs font-bold text-slate-900">04. Mock Interview</div>
+              <div class="text-[11px] text-slate-500">Evaluasi metode STAR</div>
+              <div class="motion-bar-track"><div class="motion-bar-fill"></div></div>
+            </button>
+          </div>
+
+          <!-- Dynamic Narration Banner -->
+          <div class="py-3 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+              <span id="hero-status-pill" class="font-semibold text-slate-800">
+                Terdeteksi 8 Missing Keywords kritis (ISO 27001, RCM, SQL CTE, RAID Log)
+              </span>
+            </div>
+            <span id="hero-live-score" class="px-3 py-1 rounded-full text-xs font-bold font-mono-num bg-amber-100 text-amber-900 self-start sm:self-auto">
+              46% Initial Match
+            </span>
+          </div>
+
+          <!-- Animated SVG Trajectory + Synchronized Table -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-4 items-center">
+            <!-- Left: Animated Growth Trajectory Graph (5 cols) -->
+            <div class="lg:col-span-5 space-y-3">
+              <div class="text-xs font-bold text-slate-900">Grafik Kenaikan Kesiapan Kandidat</div>
+              <svg class="w-full h-36 overflow-visible" viewBox="0 0 420 120" fill="none">
+                <line x1="0" y1="20" x2="420" y2="20" stroke="#E2E8F0" stroke-dasharray="4 4" />
+                <line x1="0" y1="60" x2="420" y2="60" stroke="#E2E8F0" stroke-dasharray="4 4" />
+                <line x1="0" y1="100" x2="420" y2="100" stroke="#E2E8F0" />
+                <!-- Base Ghost Path -->
+                <path d="M 16 100 C 120 95, 220 55, 404 16" stroke="#E2E8F0" stroke-width="3" fill="none" />
+                <!-- Animated Motion Path -->
+                <path id="hero-growth-path" class="motion-curve-line" d="M 16 100 C 120 95, 220 55, 404 16" stroke="#D97706" stroke-width="3.5" fill="none" />
+                <circle cx="16" cy="100" r="4.5" fill="#D97706" />
+                <circle cx="150" cy="78" r="4.5" fill="#0284C7" />
+                <circle cx="285" cy="40" r="4.5" fill="#059669" />
+                <circle cx="404" cy="16" r="5.5" fill="#10B981" />
+              </svg>
+              <p id="hero-motion-narration" class="text-xs text-slate-600 m-0 leading-relaxed">
+                Tahap 1 (Pay-Per-Try): Kandidat mengecek persentase kecocokan CV dengan Job Description dan menemukan celah kata kunci penyebab gagal screening ATS.
+              </p>
+            </div>
+
+            <!-- Right: Synchronized Candidate Progress Table (7 cols) -->
+            <div class="lg:col-span-7 overflow-x-auto lg:border-l lg:border-slate-200 lg:pl-6">
+              <table class="w-full text-left border-collapse text-xs font-mono-num">
+                <thead>
+                  <tr class="border-b border-slate-200 text-slate-500">
+                    <th class="py-2 px-2.5">Target Posisi</th>
+                    <th class="py-2 px-2.5">Awal</th>
+                    <th class="py-2 px-2.5">Solusi Produk</th>
+                    <th class="py-2 px-2.5">Sesudah</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr class="hero-sheet-row transition-colors">
+                    <td class="py-2.5 px-2.5 font-sans font-semibold text-slate-900">Junior IT GRC & Audit</td>
+                    <td class="py-2.5 px-2.5 text-amber-700 font-bold">46%</td>
+                    <td class="py-2.5 px-2.5 text-slate-700">+IT GRC Case Kit (RCM)</td>
+                    <td class="py-2.5 px-2.5 text-emerald-700 font-bold">89% Ready</td>
+                  </tr>
+                  <tr class="hero-sheet-row transition-colors">
+                    <td class="py-2.5 px-2.5 font-sans font-semibold text-slate-900">Associate Data Analyst</td>
+                    <td class="py-2.5 px-2.5 text-amber-700 font-bold">52%</td>
+                    <td class="py-2.5 px-2.5 text-slate-700">+Data Analyst Kit (SQL/BI)</td>
+                    <td class="py-2.5 px-2.5 text-emerald-700 font-bold">91% Ready</td>
+                  </tr>
+                  <tr class="hero-sheet-row transition-colors">
+                    <td class="py-2.5 px-2.5 font-sans font-semibold text-slate-900">Junior PMO Officer</td>
+                    <td class="py-2.5 px-2.5 text-rose-700 font-bold">44%</td>
+                    <td class="py-2.5 px-2.5 text-slate-700">+Template PMO & ITSM</td>
+                    <td class="py-2.5 px-2.5 text-emerald-700 font-bold">87% Ready</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+                <span class="text-xs text-slate-500">Ingin mencoba langsung dengan CV Anda?</span>
+                <button onclick="selectProductFromSubMenu('jd-match')" class="text-xs font-bold text-emerald-800 hover:underline bg-transparent border-0 cursor-pointer p-0">
+                  Buka di Interactive Studio →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Track & Role Strip Below Hero -->
+        <div class="mt-8">
+          <div class="text-xs font-medium text-slate-500 mb-3">Dirancang spesifik untuk jalur karir paling diminati fresh graduate:</div>
+          <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-bold text-slate-800">
+            <span>IT GRC & ISO 27001 Audit</span>
+            <span class="hidden sm:inline">•</span>
+            <span>Data Analyst (SQL & Power BI)</span>
+            <span class="hidden sm:inline">•</span>
+            <span>PMO & Project Governance</span>
+            <span class="hidden sm:inline">•</span>
+            <span>ITSM & Incident SLA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 4. CONNECTED PRODUCT ECOSYSTEM (Point 4: Saling Mengunci Konversi)  -->
+    <!-- =================================================================== -->
+    <section id="connected-funnel" class="max-w-6xl mx-auto px-4 py-16">
+      <div class="max-w-2xl mb-10">
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold text-slate-900 m-0">
+          Satu Ekosistem yang Saling Mengunci Kelulusan Anda
+        </h2>
+        <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+          Setiap produk dirancang berkesinambungan mengikuti tahapan nyata pencari kerja—mulai dari mendeteksi mengapa CV Anda belum dipanggil, membangun portofolio pengganti pengalaman kerja, hingga lolos wawancara akhir.
+        </p>
+      </div>
+
+        <!-- 4 Connected Conversion Steps (Clean Divider Table/List — Zero Nested Cards) -->
+      <div class="border-y border-slate-200 divide-y divide-slate-200">
+        <!-- Tahap 1 -->
+        <div class="funnel-step-row py-6 px-2 sm:px-4 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+          <div class="lg:col-span-3">
+            <h3 class="text-base font-bold text-slate-900 m-0">01. JD vs CV Match + Job Tracker</h3>
+            <div class="text-xs font-mono-num font-semibold text-amber-800 mt-1">Diagnosa & Tracking • Trial Gratis / Rp 29.000</div>
+          </div>
+          <div class="lg:col-span-6 text-xs text-slate-600 space-y-1 leading-relaxed">
+            <div><strong class="text-slate-900">Masalah:</strong> Sudah mengirim puluhan lamaran tapi selalu gugur di tahap awal tanpa tahu letak kesalahannya.</div>
+            <div><strong class="text-emerald-800">Kesinambungan ke Tahap 2:</strong> Setelah melihat skor CV ternyata baru <strong>46%</strong> dan ada 8 keyword teknis yang hilang, Anda langsung tahu bagian mana yang harus dipoles.</div>
+          </div>
+          <div class="lg:col-span-3 lg:text-right">
+            <button class="btn-pill-white w-full sm:w-auto" onclick="selectProductFromSubMenu('jd-match')">
+              <span>Cek Skor CV Sekarang</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tahap 2 -->
+        <div class="funnel-step-row py-6 px-2 sm:px-4 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+          <div class="lg:col-span-3">
+            <h3 class="text-base font-bold text-slate-900 m-0">02. AI CV Preparation & ATS Formatter</h3>
+            <div class="text-xs font-mono-num font-semibold text-sky-800 mt-1">Perbaikan Dokumen • One-Time Rp 49.000</div>
+          </div>
+          <div class="lg:col-span-6 text-xs text-slate-600 space-y-1 leading-relaxed">
+            <div><strong class="text-slate-900">Masalah:</strong> Pengalaman di kampus hanya sebatas kepanitiaan atau magang singkat yang terdengar kurang meyakinkan di mata HRD.</div>
+            <div><strong class="text-emerald-800">Kesinambungan ke Tahap 3:</strong> Kalimat CV sudah rapi berstandar ATS, namun untuk posisi teknis seperti <em>IT GRC</em> atau <em>Data Analyst</em>, HRD meminta <strong>bukti proyek portofolio nyata</strong>.</div>
+          </div>
+          <div class="lg:col-span-3 lg:text-right">
+            <button class="btn-pill-white w-full sm:w-auto" onclick="selectProductFromSubMenu('cv-prep', 'cv-polisher')">
+              <span>Polish Kalimat CV</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tahap 3 -->
+        <div class="funnel-step-row py-6 px-2 sm:px-4 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+          <div class="lg:col-span-3">
+            <h3 class="text-base font-bold text-slate-900 m-0">03. Job-Ready Case Kits & Template Kerja</h3>
+            <div class="text-xs font-mono-num font-semibold text-emerald-800 mt-1">Bukti Portofolio • Rp 49.000 – Rp 199.000</div>
+          </div>
+          <div class="lg:col-span-6 text-xs text-slate-600 space-y-1 leading-relaxed">
+            <div><strong class="text-slate-900">Masalah:</strong> Bingung bagaimana menerapkan SQL/Power BI atau ISO 27001 menjadi proyek yang bisa dipamerkan saat melamar kerja.</div>
+            <div><strong class="text-emerald-800">Kesinambungan ke Tahap 4:</strong> Setelah melampirkan <em>Audit Working Paper</em> atau <em>Dashboard Analisis</em> dari Kit ini ke CV, skor naik ke <strong>89%</strong> dan panggilan <strong>User Interview</strong> mulai berdatangan!</div>
+          </div>
+          <div class="lg:col-span-3 lg:text-right">
+            <button class="btn-pill-white w-full sm:w-auto" onclick="selectProductFromSubMenu('toolkits', 'all')">
+              <span>Pilih Track Portofolio</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tahap 4 -->
+        <div class="funnel-step-row py-6 px-2 sm:px-4 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+          <div class="lg:col-span-3">
+            <h3 class="text-base font-bold text-slate-900 m-0">04. Mock Interview & Presentation Prep</h3>
+            <div class="text-xs font-mono-num font-semibold text-rose-800 mt-1">Eksekusi Wawancara • Rp 49.000/bln</div>
+          </div>
+          <div class="lg:col-span-6 text-xs text-slate-600 space-y-1 leading-relaxed">
+            <div><strong class="text-slate-900">Masalah:</strong> Gugup saat ditanya studi kasus teknis oleh Manager atau diminta mempresentasikan solusi di tahap akhir.</div>
+            <div><strong class="text-emerald-800">Hasil Akhir (Goal):</strong> Berlatih menjawab via suara dengan evaluasi rubrik <strong>STAR</strong> + menyiapkan deck <strong>Corporate Presentation</strong> hingga menerima <em>Offer Letter</em>.</div>
+          </div>
+          <div class="lg:col-span-3 lg:text-right">
+            <button class="btn-pill-white w-full sm:w-auto" onclick="selectProductFromSubMenu('interview')">
+              <span>Mulai Simulasi Interview</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 5. SPLIT FEATURE BLOCKS (Equals Reference)                          -->
+    <!-- =================================================================== -->
+    <section id="features-split" class="max-w-6xl mx-auto px-4 py-10 space-y-14">
+
+      <!-- SPLIT 1: WHITE LEFT + CYAN RIGHT (#2AD4E8) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 border-y border-slate-200">
+        <div class="p-6 sm:p-12 flex flex-col justify-between bg-white">
+          <div class="my-4 sm:my-6 space-y-4">
+            <h3 class="font-display text-2xl sm:text-4xl font-semibold text-slate-900 m-0">
+              Instantly match your CV to any role
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-md">
+              Tidak perlu menebak-nebak mengapa CV Anda belum dipanggil HR. Algoritma Hybrid kami mencocokkan kata kunci teknis profesi dan merapikan kalimat pengalaman organisasi/magang Anda dalam hitungan detik.
+            </p>
+            <button class="btn-pill-white mt-2" onclick="selectProductFromSubMenu('jd-match')">
+              <span>Coba JD vs CV Match di Studio</span>
+              <span>→</span>
+            </button>
+          </div>
+          <div class="text-xs font-mono-num text-slate-500 pt-4">
+            Pay-Per-Try • Dilengkapi Auto PII Masking (UU PDP)
+          </div>
+        </div>
+
+        <div class="color-stage-cyan flex items-center justify-center min-h-[300px]">
+          <div class="grid grid-cols-3 gap-3 sm:gap-4 w-full max-w-xs">
+            <div class="floating-icon-tile"><span class="text-xs font-bold font-mono-num">ISO 27001</span></div>
+            <div class="floating-icon-tile"><span class="text-xs font-bold font-mono-num">SQL CTE</span></div>
+            <div class="floating-icon-tile"><span class="text-xs font-bold font-mono-num">Power BI</span></div>
+            <div class="floating-icon-tile"><span class="text-xs font-bold font-mono-num">PMO WBS</span></div>
+            <div class="floating-icon-tile"><span class="text-xs font-bold font-mono-num">ATS Ready</span></div>
+            <div class="floating-icon-tile"><span class="text-xs font-bold font-mono-num">ITSM SLA</span></div>
+            <div class="floating-icon-tile"><span class="text-xs font-bold font-mono-num">RCM Audit</span></div>
+            <div class="floating-icon-tile"><span class="text-xs font-bold font-mono-num">Excel Model</span></div>
+            <div class="floating-icon-tile"><span class="text-xs font-bold font-mono-num">STAR Method</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPLIT 2: WHITE LEFT + MINT GREEN RIGHT (#7AE5B8) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 border-y border-slate-200">
+        <div class="p-6 sm:p-12 flex flex-col justify-between bg-white">
+          <div class="my-4 sm:my-6 space-y-4">
+            <h3 class="font-display text-2xl sm:text-4xl font-semibold text-slate-900 m-0">
+              Build real job-ready portfolios from scratch
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-md">
+              Belum punya pengalaman kerja bukan lagi penghalang. Kerjakan simulasi audit ISO 27001 lengkap dengan bukti sintetis, atau proyek analisis data bisnis nyata, ditambah template kerja PMO & ITSM.
+            </p>
+            <button class="btn-pill-white mt-2" onclick="selectProductFromSubMenu('toolkits', 'all')">
+              <span>Jelajahi Job-Ready Kit di Studio</span>
+              <span>→</span>
+            </button>
+          </div>
+          <div class="text-xs font-mono-num text-slate-500 pt-4">
+            One-Time Buy (Rp 29rb – Rp 199rb) • Tanpa Langganan Wajib
+          </div>
+        </div>
+
+        <div class="color-stage-mint flex items-center justify-center min-h-[300px]">
+          <div class="bg-white rounded-xl p-5 sm:p-6 shadow-lg max-w-sm w-full divide-y divide-slate-200">
+            <div class="pb-3 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-900">Pilih Track Portofolio Anda</span>
+              <span class="text-xs font-mono-num text-emerald-800 font-bold">Sekali Beli</span>
+            </div>
+            <div class="py-3 space-y-1">
+              <div class="text-xs font-bold text-slate-900">Track A: Data Analyst Job-Ready Kit</div>
+              <div class="text-xs text-slate-600">Dataset Bisnis + SQL/Excel + Power BI Brief</div>
+              <div class="text-xs font-mono-num font-bold text-emerald-800">Rp 99.000</div>
+            </div>
+            <div class="py-3 space-y-1">
+              <div class="text-xs font-bold text-slate-900">Track B: IT GRC & Audit Job-Ready Kit</div>
+              <div class="text-xs text-slate-600">Simulasi Audit + RCM ISO 27001 + Working Paper</div>
+              <div class="text-xs font-mono-num font-bold text-emerald-800">Rp 129.000</div>
+            </div>
+            <div class="pt-3 text-xs font-bold text-slate-900">
+              Bundel Kedua Track: Rp 199.000 (Hemat Rp 29.000)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPLIT 3: WHITE LEFT + SOFT YELLOW RIGHT (#FAF078) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 border-y border-slate-200">
+        <div class="p-6 sm:p-12 flex flex-col justify-between bg-white">
+          <div class="my-4 sm:my-6 space-y-4">
+            <h3 class="font-display text-2xl sm:text-4xl font-semibold text-slate-900 m-0">
+              Practice User Interviews with actionable feedback
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed max-w-md">
+              Hilangkan rasa gugup sebelum menghadapi User Interview asli. Latih jawaban Anda menggunakan suara, dapatkan skor struktur STAR, dan pelajari contoh jawaban standar praktisi senior.
+            </p>
+            <button class="btn-pill-white mt-2" onclick="selectProductFromSubMenu('interview')">
+              <span>Coba Simulasi Interview di Studio</span>
+              <span>→</span>
+            </button>
+          </div>
+          <div class="text-xs font-mono-num text-slate-500 pt-4">
+            Membership Fleksibel • Rubrik Terkurasi Praktisi IT GRC & HR
+          </div>
+        </div>
+
+        <div class="color-stage-yellow flex items-center justify-center min-h-[300px]">
+          <div class="bg-white rounded-xl p-5 sm:p-6 shadow-lg max-w-sm w-full space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+              <span class="text-xs font-bold text-slate-900">Evaluasi Jawaban STAR</span>
+              <span class="text-xs font-mono-num font-bold text-emerald-800">Skor: 86/100</span>
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between"><span>Situation & Task</span><strong class="font-mono-num">88%</strong></div>
+              <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-emerald-600" style="width: 88%;"></div></div>
+              <div class="flex justify-between pt-1"><span>Technical Accuracy (ISO 27001)</span><strong class="font-mono-num">85%</strong></div>
+              <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-slate-900" style="width: 85%;"></div></div>
+            </div>
+            <p class="text-xs text-slate-700 m-0 pt-2 border-t border-slate-200 leading-relaxed">
+              <strong>Feedback Praktisi:</strong> "Penjelasan langkah User Access Review sudah tepat. Tambahkan referensi klausul Annex A.5.18 agar semakin kuat."
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 6. "WHAT PEOPLE ARE SAYING" (Colorful Masonry Wall)                 -->
+    <!-- =================================================================== -->
+    <section id="wall-of-love" class="max-w-6xl mx-auto px-4 py-14">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold text-slate-900 m-0">What people are saying</h2>
+        <p class="text-sm text-slate-600 mt-2">
+          Cerita dari mahasiswa tingkat akhir, fresh graduate, serta rekan praktisi kolaborator di bidang IT GRC, Data, dan HR.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="space-y-5">
+          <div class="testi-card testi-coral">
+            <div class="font-bold text-xs mb-1">Dimas Nugroho • Fresh Graduate SI</div>
+            <p class="m-0">
+              "Sebelumnya saya cuma tahu nama ISO 27001 dari bangku kuliah. Lewat <strong>IT GRC Job-Ready Kit</strong>, saya akhirnya paham bentuk Risk Control Matrix dan cara menulis Audit Working Paper. Saat User Interview di bank digital, penguji kaget karena saya bisa menjelaskan prosedur pengujian bukti dengan sangat runtut!"
+            </p>
+          </div>
+
+          <div class="testi-card testi-sky">
+            <div class="font-bold text-xs mb-1">alya_putri • Mahasiswa Tingkat Akhir</div>
+            <p class="m-0">
+              "Fitur <strong>AI CV Polisher</strong>-nya beneran ngubah kalimat kepanitiaan kampusku yang tadinya kelihatan biasa aja jadi kalimat profesional yang penuh metrik dampak. Bayarnya juga gampang banget tinggal scan QRIS Rp 29.000 tanpa harus langganan bulanan!"
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-5">
+          <div class="testi-card testi-amber">
+            <div class="font-bold text-xs mb-1">Reza Firmansyah, CISA • IT GRC Practitioner</div>
+            <p class="m-0">
+              "Masalah terbesar kandidat junior saat melamar IT Audit adalah mereka hafal teori kontrol, tapi bingung saat diminta menguji sampel bukti. Studi kasus sintetis di platform ini menjembatani celah tersebut secara praktis."
+            </p>
+          </div>
+
+          <div class="testi-card testi-sand">
+            <div class="font-bold text-xs mb-1">Kevin Ardiansyah • Junior Data Analyst</div>
+            <p class="m-0">
+              "Saya sudah ikut kursus SQL dan Power BI, tapi bingung mau bikin portofolio apa. <strong>Data Analyst Job-Ready Kit</strong> ngasih dataset bisnis beserta 5 pertanyaan bisnis yang jelas. Dalam seminggu saya punya 1 proyek utuh buat dipajang di CV dan LinkedIn."
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-5">
+          <div class="testi-card testi-sand">
+            <div class="font-bold text-xs mb-1">Sarah Nabila • Tech Recruiter / HR Collaborator</div>
+            <p class="m-0">
+              "Banyak fresh graduate gugur bukan karena kurang pintar, tapi karena CV mereka tidak mencantumkan kata kunci yang dicari sistem ATS dan jawaban interview-nya berputar-putar. Simulasi metode STAR di platform ini sangat membantu kandidat menjawab langsung ke poinnya."
+            </p>
+          </div>
+
+          <div class="testi-card testi-coral">
+            <div class="font-bold text-xs mb-1">Fajar Maulana • Junior PMO Officer</div>
+            <p class="m-0">
+              "Template <strong>PMO, ITSM & Daily Tracker</strong> serta panduan <strong>Corporate Presentation</strong>-nya menyelamatkan minggu pertama saya saat baru diterima kerja. Nggak perlu lagi bikin WBS dan RAID Log dari kertas kosong!"
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 7. PRICING SUMMARY TABLE                                            -->
+    <!-- =================================================================== -->
+    <section id="pricing-section" class="max-w-5xl mx-auto px-4 py-14">
+      <div class="text-center max-w-xl mx-auto mb-8">
+        <h2 class="font-display text-3xl font-semibold text-slate-900 m-0">Model Harga yang Fleksibel</h2>
+        <p class="text-sm text-slate-600 mt-2">
+          Jangan membayar langganan bulanan untuk fitur yang hanya Anda butuhkan sekali. Pilih sesuai tahapan melamar kerja Anda.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto border-y border-slate-200 bg-white">
+        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+          <thead>
+            <tr class="border-b border-slate-300 text-slate-900">
+              <th class="py-3.5 px-4">Kategori Produk</th>
+              <th class="py-3.5 px-4">Skema Pembelian</th>
+              <th class="py-3.5 px-4">Harga Uji</th>
+              <th class="py-3.5 px-4 text-right">Aksi</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr>
+              <td class="py-3.5 px-4 font-semibold">Template PMO, ITSM, Daily & Job Tracker</td>
+              <td class="py-3.5 px-4 text-slate-600">Sekali Bayar (One-Time Buy)</td>
+              <td class="py-3.5 px-4 font-mono-num font-bold whitespace-nowrap">Rp 29.000 – Rp 79.000</td>
+              <td class="py-3.5 px-4 text-right whitespace-nowrap"><button class="text-xs font-bold text-emerald-800 hover:underline bg-transparent border-0 cursor-pointer" onclick="selectProductFromSubMenu('toolkits', 'template')">Buka di Studio →</button></td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-semibold">Paket AI CV Preparation, Presentation & Kuota JD Match</td>
+              <td class="py-3.5 px-4 text-slate-600">Sekali Bayar / Per Paket Kuota</td>
+              <td class="py-3.5 px-4 font-mono-num font-bold whitespace-nowrap">Rp 29.000 – Rp 99.000</td>
+              <td class="py-3.5 px-4 text-right whitespace-nowrap"><button class="text-xs font-bold text-emerald-800 hover:underline bg-transparent border-0 cursor-pointer" onclick="selectProductFromSubMenu('jd-match')">Coba Sekarang →</button></td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-semibold">Career Toolkit Spesifik Profesi (Data Analyst / IT GRC)</td>
+              <td class="py-3.5 px-4 text-slate-600">Sekali Bayar per Track / Bundel</td>
+              <td class="py-3.5 px-4 font-mono-num font-bold whitespace-nowrap">Rp 99.000 – Rp 199.000</td>
+              <td class="py-3.5 px-4 text-right whitespace-nowrap"><button class="text-xs font-bold text-emerald-800 hover:underline bg-transparent border-0 cursor-pointer" onclick="selectProductFromSubMenu('toolkits', 'toolkit')">Pilih Track →</button></td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-semibold">Membership User Interview Mock Up & Materi Baru</td>
+              <td class="py-3.5 px-4 text-slate-600">Langganan Bulanan (FUP 20 Sesi)</td>
+              <td class="py-3.5 px-4 font-mono-num font-bold whitespace-nowrap">Rp 39.000 – Rp 79.000 / bln</td>
+              <td class="py-3.5 px-4 text-right whitespace-nowrap"><button class="text-xs font-bold text-emerald-800 hover:underline bg-transparent border-0 cursor-pointer" onclick="selectProductFromSubMenu('interview')">Mulai Latihan →</button></td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-semibold">1-on-1 Review oleh Praktisi (Human Review)</td>
+              <td class="py-3.5 px-4 text-slate-600">Per Sesi (Slot Mingguan Terbatas)</td>
+              <td class="py-3.5 px-4 font-mono-num font-bold whitespace-nowrap">Rp 149.000 – Rp 249.000 / sesi</td>
+              <td class="py-3.5 px-4 text-right whitespace-nowrap"><button class="text-xs font-bold text-emerald-800 hover:underline bg-transparent border-0 cursor-pointer" onclick="selectProductFromSubMenu('toolkits', 'service')">Cek Slot →</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Editorial Manifesto Quote + Colorful Pixel Divider + Cyan CTA -->
+    <section class="max-w-3xl mx-auto px-4 py-14 text-center">
+      <p class="font-display text-xl sm:text-2xl text-slate-800 leading-relaxed italic">
+        "Fresh graduate tidak gagal karena kurang pintar. Mereka kalah karena belum pernah diperlihatkan seperti apa bentuk dokumen kerja, bukti audit, kueri analisis bisnis, dan ekspektasi jawaban interview di dunia korporat yang sebenarnya."
+      </p>
+      <div class="mt-4 text-xs text-slate-600">
+        <strong class="text-slate-900">Tim Kolaborator Test App</strong> • Engineering, Data, IT GRC & HR Practitioners
+      </div>
+    </section>
+
+    <div class="grid grid-cols-6 sm:grid-cols-10 h-6 w-full">
+      <div style="background: #0F172A;"></div>
+      <div style="background: #F43F5E;"></div>
+      <div style="background: #FACC15;"></div>
+      <div style="background: #10B981;"></div>
+      <div style="background: #38BDF8;"></div>
+      <div style="background: #F97316;"></div>
+      <div class="hidden sm:block" style="background: #14B8A6;"></div>
+      <div class="hidden sm:block" style="background: #EC4899;"></div>
+      <div class="hidden sm:block" style="background: #84CC16;"></div>
+      <div class="hidden sm:block" style="background: #EAB308;"></div>
+    </div>
+
+    <section class="color-stage-cyan text-center">
+      <div class="max-w-2xl mx-auto py-10 space-y-6">
+        <h2 class="font-display text-3xl sm:text-5xl font-semibold text-slate-900 m-0 leading-tight">
+          The only career launchpad built with real industry case kits
+        </h2>
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <button class="btn-pill-white" onclick="selectProductFromSubMenu('jd-match')">
+            Buka Interactive Studio →
+          </button>
+          <button class="btn-pill-white" onclick="selectProductFromSubMenu('toolkits', 'all')">
+            Jelajahi Job-Ready Kits
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE VIEW 2: DEDICATED "INTERACTIVE STUDIO" TAB PAGE (Point 2)        -->
+  <!-- ===================================================================== -->
+  <div id="page-studio" class="page-view">
+    <section class="studio-page-section">
+      <div class="max-w-6xl mx-auto space-y-6">
+
+        <!-- Studio Top Bar: Clean Title + Redesigned Horizontal Studio Pill Bar (No Back Button / No Exposed Wallet Bar) -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-lg sm:text-xl font-bold text-slate-900 m-0">Interactive Product Studio</h1>
+            <p class="text-xs text-slate-600 m-0 mt-0.5">Uji coba langsung seluruh 5 produk inti dalam satu ruang kerja terpadu.</p>
+          </div>
+
+          <!-- Redesigned Swipeable Studio Pill Bar -->
+          <div class="studio-pill-bar">
+            <button class="studio-pill-btn active" data-pane="jd-match" onclick="switchStudioPane('jd-match')">
+              <span class="font-mono-num text-[11px] opacity-70">01</span>
+              <span>JD vs CV Match</span>
+            </button>
+            <button class="studio-pill-btn" data-pane="cv-prep" onclick="switchStudioPane('cv-prep')">
+              <span class="font-mono-num text-[11px] opacity-70">02</span>
+              <span>CV &amp; Presentation</span>
+            </button>
+            <button class="studio-pill-btn" data-pane="toolkits" onclick="switchStudioPane('toolkits')">
+              <span class="font-mono-num text-[11px] opacity-70">03</span>
+              <span>Toolkits &amp; Templates</span>
+            </button>
+            <button class="studio-pill-btn" data-pane="tracker" onclick="switchStudioPane('tracker')">
+              <span class="font-mono-num text-[11px] opacity-70">04</span>
+              <span>Job Tracker</span>
+            </button>
+            <button class="studio-pill-btn" data-pane="interview" onclick="switchStudioPane('interview')">
+              <span class="font-mono-num text-[11px] opacity-70">05</span>
+              <span>Mock Interview</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- MAIN INTERACTIVE STUDIO WINDOW -->
+        <div class="app-window-frame">
+
+          <!-- PANE 1: JD vs CV MATCH PERCENTAGE -->
+          <div id="pane-jd-match" class="studio-pane active space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-slate-900 m-0">Job Description vs CV Match Percentage</h2>
+                <p class="text-xs text-slate-500 m-0 mt-1">Analisis kecocokan kata kunci profesi (40%) &amp; relevansi konteks pengalaman (60%)</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-xs text-slate-500">Skenario Lowongan:</span>
+                <button class="scenario-pill" data-role="it-grc" onclick="selectJdScenario('it-grc')">IT GRC / Audit</button>
+                <button class="scenario-pill" data-role="data-analyst" onclick="selectJdScenario('data-analyst')">Data Analyst</button>
+                <button class="scenario-pill" data-role="pmo" onclick="selectJdScenario('pmo')">PMO / IT Project</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+              <div class="lg:col-span-5 space-y-4">
+                <div class="flex items-center justify-between">
+                  <label for="input-jd-text" class="text-xs font-bold text-slate-800">1. Job Description (Lowongan Tujuan)</label>
+                  <span id="jd-char-count" class="text-xs font-mono-num text-slate-500">0 / 3.000 kar</span>
+                </div>
+                <textarea id="input-jd-text" rows="5" maxlength="3000" oninput="updateCharCounters()" class="w-full p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none leading-relaxed"></textarea>
+
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                  <label for="input-cv-text" class="text-xs font-bold text-slate-800">2. Ringkasan CV Anda Saat Ini</label>
+                  <div class="flex items-center gap-2">
+                    <button onclick="applyPiiScrubberToInput()" class="px-2 py-0.5 rounded bg-emerald-100 hover:bg-emerald-200 text-emerald-950 text-[11px] font-semibold transition cursor-pointer border-0" title="Sensor otomatis NIK, No HP, dan Email">
+                      Sensor Data Pribadi
+                    </button>
+                    <span id="cv-char-count" class="text-xs font-mono-num text-slate-500">0 / 4.000 kar</span>
+                  </div>
+                </div>
+                <textarea id="input-cv-text" rows="4" maxlength="4000" oninput="updateCharCounters()" class="w-full p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none leading-relaxed"></textarea>
+
+                <button class="w-full py-3 px-4 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer" onclick="runJdMatchAnalysis()">
+                  Hitung Persentase Kecocokan CV vs JD
+                </button>
+              </div>
+
+              <div class="lg:col-span-7 space-y-5 lg:border-l lg:border-slate-200 lg:pl-8">
+                <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                  <div>
+                    <div class="text-xs text-slate-500">Skor Kecocokan CV</div>
+                    <div class="flex flex-wrap items-baseline gap-2.5 mt-1">
+                      <span id="match-score-number" class="text-3xl font-bold font-mono-num text-slate-900">46%</span>
+                      <span id="match-status-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-900">Perlu Perbaikan</span>
+                      <button onclick="openScoreCardModal('jd-match')" class="px-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition cursor-pointer border-0">
+                        Bagikan Skor ↗
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-6 text-xs font-mono-num">
+                    <div>
+                      <span class="text-slate-500 block">Keyword (40%)</span>
+                      <strong id="subscore-keyword" class="text-sm text-slate-900">40%</strong>
+                    </div>
+                    <div>
+                      <span class="text-slate-500 block">Konteks (60%)</span>
+                      <strong id="subscore-context" class="text-sm text-slate-900">50%</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="w-full h-2.5 rounded-full bg-slate-100 overflow-hidden">
+                  <div id="match-score-bar" class="h-full rounded-full bg-amber-500 transition-all duration-700" style="width: 46%;"></div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                  <div>
+                    <div class="text-xs font-bold text-slate-800 mb-2">Keyword Sudah Ada:</div>
+                    <div id="matched-keywords-list" class="flex flex-wrap gap-1.5"></div>
+                  </div>
+                  <div>
+                    <div class="text-xs font-bold text-slate-800 mb-2">Missing Keywords (Skill Gap):</div>
+                    <div id="missing-keywords-list" class="flex flex-wrap gap-1.5"></div>
+                  </div>
+                </div>
+
+                <!-- User-Friendly Market Trend Insight -->
+                <div class="py-2.5 border-y border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+                  <span class="text-slate-700"><strong class="text-slate-900">Tren Keahlian Bulan Ini:</strong> <span id="market-radar-trend">Kepatuhan UU PDP &amp; ISO 27001:2022 Annex A.5.18</span></span>
+                  <span id="cache-hash-indicator" class="text-[11px] text-emerald-800 font-semibold">Tersimpan Otomatis</span>
+                </div>
+
+                <div class="pt-1">
+                  <div class="text-xs font-bold text-slate-800 mb-1">Saran Perbaikan Kalimat (2 Terbuka Gratis):</div>
+                  <div id="free-recommendations-list"></div>
+                </div>
+
+                <div class="pt-1 space-y-3">
+                  <div id="locked-recommendations-list" class="divide-y divide-slate-200 redacted-blur"></div>
+                  <div id="blurred-teaser-overlay" class="p-4 sm:p-5 rounded-xl bg-amber-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="text-left space-y-1">
+                      <h3 class="text-sm font-bold text-slate-900 m-0">Buka Seluruh 6 Kalimat ATS + Dapat 5x Kuota Cek CV</h3>
+                      <p class="text-xs text-slate-700 m-0">Dapatkan rekomendasi kalimat siap salin untuk menaikkan skor CV dari 46% menjadi 89%.</p>
+                    </div>
+                    <button class="w-full sm:w-auto px-5 py-3 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition shrink-0 cursor-pointer border-0" onclick="openQrisCheckout({ title: 'Buka Hasil Lengkap + 5x Kuota CV Match', price: 29000, type: 'unlock-jd-match', allowOrderBump: true })">
+                      Buka via QRIS — Rp 29.000
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Clean User Feedback Bar (No Technical Telemetry Jargon) -->
+                <div class="pt-3 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600">
+                  <span>Apakah saran perbaikan kalimat ini membantu Anda?</span>
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-slate-500">Beri Nilai:</span>
+                    <button onclick="submitAiTelemetryRating('JD vs CV Match', 1)" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono-num text-xs cursor-pointer border-0">1</button>
+                    <button onclick="submitAiTelemetryRating('JD vs CV Match', 2)" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono-num text-xs cursor-pointer border-0">2</button>
+                    <button onclick="submitAiTelemetryRating('JD vs CV Match', 3)" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono-num text-xs cursor-pointer border-0">3</button>
+                    <button onclick="submitAiTelemetryRating('JD vs CV Match', 4)" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono-num text-xs cursor-pointer border-0">4</button>
+                    <button onclick="submitAiTelemetryRating('JD vs CV Match', 5)" class="px-2 py-0.5 rounded bg-emerald-100 hover:bg-emerald-200 text-emerald-950 font-bold font-mono-num text-xs cursor-pointer border-0">5 ★</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANE 2: AI CV POLISHER & CORPORATE PRESENTATION PREP -->
+          <div id="pane-cv-prep" class="studio-pane space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-slate-900 m-0">AI CV Preparation &amp; Corporate Presentation Deck</h2>
+                <p class="text-xs text-slate-500 m-0 mt-1">Perapih kalimat pengalaman kerja &amp; cetak CV berstandar ATS</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button id="subtab-btn-cv" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-900 text-white transition" onclick="switchCvSubTab('cv-polisher')">
+                  AI CV Polisher &amp; ATS PDF
+                </button>
+                <button id="subtab-btn-pres" class="px-4 py-2 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition" onclick="switchCvSubTab('corp-presentation')">
+                  Corporate Presentation Prep
+                </button>
+              </div>
+            </div>
+
+            <div id="subview-cv-polisher" class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+              <div class="lg:col-span-6 space-y-4">
+                <div class="pb-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <div class="text-xs font-bold text-slate-900">AI Agent Perapih Job List</div>
+                    <div class="text-xs text-slate-500">Sisa Kuota Polish: <strong id="cv-polish-credits-label" class="font-mono-num text-slate-900">1</strong> • Mengubah pengalaman magang jadi standar HRD.</div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button class="px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-semibold transition cursor-pointer border-0" onclick="openQrisCheckout({ title: 'Paket AI CV Preparation (5x Polish + 10x JD Match)', price: 49000, type: 'cv-pack', allowOrderBump: true })">
+                      Top-Up (Rp 49k)
+                    </button>
+                    <button class="px-4 py-2 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition shrink-0 cursor-pointer border-0" onclick="runAiCvPolish()">
+                      Polish dengan AI
+                    </button>
+                  </div>
+                </div>
+                <div id="cv-polisher-comparison"></div>
+              </div>
+
+              <div class="lg:col-span-6 space-y-4 lg:border-l lg:border-slate-200 lg:pl-8">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                  <span class="text-xs font-bold text-slate-800">Live Preview CV Standar ATS (Siap Cetak PDF)</span>
+                  <button class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-semibold transition cursor-pointer" onclick="window.print()">
+                    Unduh / Cetak PDF
+                  </button>
+                </div>
+                <div id="ats-cv-printable" class="p-5 sm:p-6 bg-slate-50 rounded-lg space-y-4 text-xs leading-relaxed">
+                  <div class="border-b border-slate-300 pb-3 text-center">
+                    <h3 class="text-base font-bold uppercase tracking-wide m-0 text-slate-900">RAKA PRATAMA, S.Kom.</h3>
+                    <div class="text-xs font-mono-num text-slate-600 mt-1">
+                      Jakarta, Indonesia • raka.pratama@email.com • linkedin.com/in/rakapratama
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-bold uppercase text-xs text-slate-900 border-b border-slate-300 pb-1 mb-2">Pengalaman Magang &amp; Organisasi</div>
+                    <div class="space-y-3">
+                      <div>
+                        <div class="flex flex-wrap justify-between font-semibold text-slate-900 gap-1">
+                          <span>Staf Magang IT Governance — PT Nusantara Digital</span>
+                          <span class="font-mono-num text-xs text-slate-600">Feb – Jun 2026</span>
+                        </div>
+                        <ul id="ats-preview-bullets-1" class="list-disc pl-4 mt-1 space-y-1 text-slate-700"></ul>
+                      </div>
+                      <div>
+                        <div class="flex flex-wrap justify-between font-semibold text-slate-900 gap-1">
+                          <span>Koordinator Divisi Riset &amp; Data — Himpunan Mahasiswa</span>
+                          <span class="font-mono-num text-xs text-slate-600">Agu 2025 – Jan 2026</span>
+                        </div>
+                        <ul id="ats-preview-bullets-2" class="list-disc pl-4 mt-1 space-y-1 text-slate-700"></ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="subview-corp-presentation" style="display: none;" class="space-y-4">
+              <div class="pb-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h3 class="text-sm font-bold text-slate-900 m-0">Corporate Presentation Preparation Kit (One-Time Buy)</h3>
+                  <p class="text-xs text-slate-600 m-0 mt-1">Struktur slide Piramida Minto, MECE, &amp; 30-60-90 Day Plan untuk tahap Case Study Interview.</p>
+                </div>
+                <button class="px-4 py-2.5 rounded-lg bg-slate-900 text-white text-xs font-semibold cursor-pointer" onclick="openQrisCheckout({ title: 'Corporate Presentation Preparation Kit', price: 59000, type: 'product', productId: 'corp-pres', allowOrderBump: true })">
+                  Beli Paket Presentasi — Rp 59.000
+                </button>
+              </div>
+              <div id="corp-slides-container"></div>
+            </div>
+          </div>
+
+          <!-- PANE 3: JOB-READY TOOLKITS & TEMPLATES -->
+          <div id="pane-toolkits" class="studio-pane space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-slate-900 m-0">Job-Ready Case Kits &amp; Template Profesional (PMO, ITSM, Tracker)</h2>
+                <p class="text-xs text-slate-500 m-0 mt-1">Sekali Beli • Akses selamanya untuk portofolio &amp; dokumen operasional kerja</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button class="catalog-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white transition" data-cat="all" onclick="filterCatalog('all')">Semua (6)</button>
+                <button class="catalog-filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-cat="toolkit" onclick="filterCatalog('toolkit')">Job-Ready Kits</button>
+                <button class="catalog-filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-cat="template" onclick="filterCatalog('template')">Template PMO/ITSM/Tracker</button>
+                <button class="catalog-filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-cat="service" onclick="filterCatalog('service')">Human Review</button>
+              </div>
+            </div>
+            <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+          </div>
+
+          <!-- PANE 4: JOB APPLICATION TRACKER -->
+          <div id="pane-tracker" class="studio-pane space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-slate-900 m-0">Template Tracker Lamaran Kerja &amp; Checklist Interview</h2>
+                <p class="text-xs text-slate-500 m-0 mt-1">Pantau progres lamaran Anda • Klik badge status pada tabel untuk mengubah tahapan</p>
+              </div>
+              <button class="px-4 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition cursor-pointer border-0" onclick="openAddApplicationModal()">
+                + Tambah Lamaran Kerja
+              </button>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <button class="tracker-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white transition" data-status="all" onclick="filterTracker('all')">Semua Status</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="wishlist" onclick="filterTracker('wishlist')">Wishlist</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="applied" onclick="filterTracker('applied')">Applied</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="hr_interview" onclick="filterTracker('hr_interview')">HR Interview</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="user_interview" onclick="filterTracker('user_interview')">User Interview</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="offer" onclick="filterTracker('offer')">Offer Letter</button>
+              <button class="tracker-filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-status="rejected" onclick="filterTracker('rejected')">Rejected</button>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500">
+                    <th class="py-3 px-3">ID</th>
+                    <th class="py-3 px-3">Perusahaan</th>
+                    <th class="py-3 px-3">Posisi</th>
+                    <th class="py-3 px-3">Status</th>
+                    <th class="py-3 px-3">Skor CV</th>
+                    <th class="py-3 px-3">Tanggal</th>
+                    <th class="py-3 px-3">Target Berikutnya</th>
+                  </tr>
+                </thead>
+                <tbody id="tracker-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- PANE 5: USER INTERVIEW MOCK UP (Membership) -->
+          <div id="pane-interview" class="studio-pane space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
+              <div>
+                <h2 class="text-base sm:text-lg font-bold text-slate-900 m-0">User Interview Simulator &amp; Evaluasi Metode STAR</h2>
+                <p class="text-xs text-slate-500 m-0 mt-1">Latihan tanya-jawab via suara (Voice-to-Text) dengan penilaian terstruktur &amp; contoh jawaban terbaik</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button class="interview-role-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white transition" data-role="it-grc" onclick="selectInterviewRole('it-grc')">IT GRC &amp; Audit</button>
+                <button class="interview-role-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-role="data-analyst" onclick="selectInterviewRole('data-analyst')">Data Analyst</button>
+                <button class="interview-role-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition" data-role="pmo" onclick="selectInterviewRole('pmo')">PMO / IT Project</button>
+                <button id="btn-interview-membership" onclick="openQrisCheckout({ title: 'Membership Mock Interview (20 Sesi + 30x CV Match / bln)', price: 49000, type: 'membership', allowOrderBump: false })" class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-100 hover:bg-emerald-200 text-emerald-950 transition cursor-pointer border-0">
+                  Langganan Rp 49k/bln
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+              <div class="lg:col-span-6 space-y-4">
+                <!-- Question Switcher + Timer Toolbar -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-200">
+                  <div class="flex items-center gap-1.5">
+                    <button id="q-step-btn-0" onclick="selectInterviewQuestion(0)" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-900 text-white cursor-pointer border-0">Soal #1 (Teknis)</button>
+                    <button id="q-step-btn-1" onclick="selectInterviewQuestion(1)" class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer border-0">Soal #2 (STAR)</button>
+                  </div>
+                  <div class="flex items-center gap-2 text-xs">
+                    <span id="interview-timer-display" class="font-mono-num font-bold text-slate-900 px-2 py-0.5 rounded bg-slate-100">02:00</span>
+                    <button id="interview-timer-btn" onclick="toggleInterviewTimer()" class="text-xs font-semibold text-emerald-800 hover:underline bg-transparent border-0 cursor-pointer p-0">Mulai Timer</button>
+                  </div>
+                </div>
+
+                <h3 id="interview-q-text" class="text-sm font-bold text-slate-900 leading-relaxed m-0"></h3>
+                <div class="text-xs font-mono-num font-semibold text-amber-800" id="interview-q-type">Technical Case</div>
+
+                <div class="py-3 border-y border-slate-200 text-xs">
+                  <strong class="text-slate-900">Fokus Penilaian Penguji:</strong>
+                  <div id="interview-q-rubric" class="text-slate-600 mt-1"></div>
+                </div>
+
+                <div class="space-y-2 pt-1">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <label for="interview-answer-input" class="text-xs font-bold text-slate-800">Jawaban Anda (<span id="interview-word-count" class="font-mono-num font-normal text-slate-500">0 / 300 kata</span>):</label>
+                    <button class="px-3.5 py-1.5 rounded-full bg-slate-100 text-xs font-semibold text-slate-900 hover:bg-slate-200 transition cursor-pointer" onclick="simulateSpeechToText()">
+                      Klik Simulasi Bicara (Voice-to-Text)
+                    </button>
+                  </div>
+                  <textarea id="interview-answer-input" rows="4" oninput="enforceInterviewWordCap()" placeholder="Klik tombol 'Klik Simulasi Bicara' atau ketik jawaban Anda (maks 300 kata)..." class="w-full p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none leading-relaxed"></textarea>
+                </div>
+
+                <button class="w-full py-3 px-4 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer" onclick="evaluateInterviewAnswer()">
+                  Evaluasi Jawaban dengan Rubrik STAR
+                </button>
+              </div>
+
+              <div class="lg:col-span-6 lg:border-l lg:border-slate-200 lg:pl-8">
+                <div id="interview-empty-box" class="h-full min-h-[220px] flex flex-col items-center justify-center p-6 text-center text-xs text-slate-500">
+                  <strong class="text-slate-800 text-sm">Siap Menguji Jawaban Interview Anda?</strong>
+                  <p class="max-w-xs mt-1">Pilih <strong>Soal #1</strong> atau <strong>Soal #2</strong>, klik <strong>"Klik Simulasi Bicara"</strong>, lalu tekan <strong>"Evaluasi Jawaban"</strong>.</p>
+                </div>
+
+                <div id="interview-evaluation-box" class="space-y-4" style="display: none;">
+                  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                    <div>
+                      <div class="text-xs text-slate-500">Skor Kesiapan Jawaban</div>
+                      <div id="ev-overall-score" class="text-2xl font-bold font-mono-num text-slate-900">82/100</div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span id="ev-readiness-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-900">Siap Interview</span>
+                      <button onclick="openScoreCardModal('interview')" class="px-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold cursor-pointer border-0">
+                        Kartu Skor ↗
+                      </button>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-3 gap-4 text-center text-xs font-mono-num py-2 border-b border-slate-200">
+                    <div>
+                      <div class="text-slate-500">STAR Method</div>
+                      <strong id="ev-star-score" class="text-sm text-slate-900">85%</strong>
+                    </div>
+                    <div>
+                      <div class="text-slate-500">Teknis</div>
+                      <strong id="ev-tech-score" class="text-sm text-slate-900">84%</strong>
+                    </div>
+                    <div>
+                      <div class="text-slate-500">Komunikasi</div>
+                      <strong id="ev-comm-score" class="text-sm text-slate-900">78%</strong>
+                    </div>
+                  </div>
+                  <div class="text-xs space-y-1">
+                    <strong class="text-emerald-800">Poin Kuat Jawaban Anda:</strong>
+                    <ul id="ev-strengths-list" class="list-disc pl-4 space-y-1 text-slate-700"></ul>
+                  </div>
+                  <div class="text-xs space-y-1">
+                    <strong class="text-amber-800">Yang Perlu Ditambahkan:</strong>
+                    <ul id="ev-improvements-list" class="list-disc pl-4 space-y-1 text-slate-700"></ul>
+                  </div>
+                  <div class="p-3.5 rounded-lg bg-emerald-50 text-xs space-y-1">
+                    <strong class="text-emerald-950">Contoh Jawaban Ideal (Model Answer):</strong>
+                    <p id="ev-model-answer" class="m-0 italic text-slate-800 leading-relaxed"></p>
+                  </div>
+                  <div class="p-3.5 rounded-lg bg-amber-50 text-xs space-y-1">
+                    <strong class="text-amber-950">Pertanyaan Lanjutan Penguji (Follow-Up):</strong>
+                    <p id="ev-followup-question" class="m-0 text-slate-800 leading-relaxed"></p>
+                  </div>
+
+                  <!-- Clean User Feedback Bar -->
+                  <div class="pt-2 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600">
+                    <span>Apakah evaluasi &amp; contoh jawaban ini membantu?</span>
+                    <div class="flex items-center gap-1">
+                      <span class="text-slate-500">Beri Nilai:</span>
+                      <button onclick="submitAiTelemetryRating('Evaluasi Interview', 4)" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono-num text-xs cursor-pointer border-0">4</button>
+                      <button onclick="submitAiTelemetryRating('Evaluasi Interview', 5)" class="px-2 py-0.5 rounded bg-emerald-100 hover:bg-emerald-200 text-emerald-950 font-bold font-mono-num text-xs cursor-pointer border-0">5 ★</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Deep Black Footer -->
+  <footer class="bg-neutral-950 text-neutral-400 py-12 px-6 text-xs">
+    <div class="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 mb-8">
+      <div class="space-y-2">
+        <div class="text-white font-bold">Products (5 Inti)</div>
+        <div><button onclick="selectProductFromSubMenu('jd-match')" class="text-neutral-400 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left">JD vs CV Match Percentage</button></div>
+        <div><button onclick="selectProductFromSubMenu('cv-prep', 'cv-polisher')" class="text-neutral-400 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left">AI CV Preparation</button></div>
+        <div><button onclick="selectProductFromSubMenu('cv-prep', 'corp-presentation')" class="text-neutral-400 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left">Corporate Presentation Prep</button></div>
+        <div><button onclick="selectProductFromSubMenu('interview')" class="text-neutral-400 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left">User Interview Mock Up</button></div>
+      </div>
+      <div class="space-y-2">
+        <div class="text-white font-bold">Job-Ready Toolkits</div>
+        <div><button onclick="selectProductFromSubMenu('toolkits', 'toolkit')" class="text-neutral-400 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left">Data Analyst Job-Ready Kit</button></div>
+        <div><button onclick="selectProductFromSubMenu('toolkits', 'toolkit')" class="text-neutral-400 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left">IT GRC & ISO 27001 Audit Kit</button></div>
+        <div><button onclick="selectProductFromSubMenu('toolkits', 'template')" class="text-neutral-400 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left">Template PMO & ITSM</button></div>
+        <div><button onclick="selectProductFromSubMenu('tracker')" class="text-neutral-400 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left">Template Tracker Lamaran</button></div>
+      </div>
+      <div class="space-y-2">
+        <div class="text-white font-bold">Architecture & Security</div>
+        <div>Go (Golang) API + PostgreSQL</div>
+        <div>Next.js Web + Flutter Mobile</div>
+        <div>Post-Quantum TLS 1.3 (ML-KEM)</div>
+        <div>OWASP WSTG & UU PDP Compliant</div>
+      </div>
+      <div class="space-y-2">
+        <div class="text-white font-bold">Payment & Growth</div>
+        <div>Dynamic QRIS (0.7% MDR)</div>
+        <div>GoPay, OVO, DANA, BCA, Mandiri</div>
+        <div><button onclick="claimCampusReferral()" class="text-neutral-400 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left">Referral Kampus (+2 Kuota)</button></div>
+        <div><button onclick="openScoreCardModal('jd-match')" class="text-neutral-400 hover:text-white bg-transparent border-0 p-0 cursor-pointer text-xs text-left">Kartu Skor Kesiapan Karir</button></div>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto border-t border-neutral-800 pt-6 flex flex-wrap items-center justify-between gap-4">
+      <div class="text-white font-bold">= Test App — Career Launchpad</div>
+      <div class="flex flex-wrap items-center gap-4">
+        <span>© 2026 Test App Prototype.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 1: COMPACT & PROPORTIONAL DYNAMIC QRIS CHECKOUT (Point 5)       -->
+  <!-- ===================================================================== -->
+  <div id="modal-qris-checkout" class="modal-backdrop">
+    <div class="bg-white rounded-xl max-w-xs sm:max-w-sm w-full p-5 space-y-3.5 shadow-2xl">
+      <div class="flex items-start justify-between gap-2 border-b border-slate-200 pb-2.5">
+        <div>
+          <h3 id="qris-item-title" class="text-xs font-bold text-slate-900 m-0 leading-snug">Paket 5x Kuota CV Match</h3>
+          <div class="text-[11px] font-mono-num font-bold text-emerald-800 mt-0.5">QRIS Dinamis • TEST APP OFFICIAL</div>
+        </div>
+        <button class="px-2.5 py-1 rounded bg-slate-100 text-slate-800 text-xs font-bold cursor-pointer border-0 shrink-0" onclick="closeModals()">✕</button>
+      </div>
+
+      <!-- Compact QR Row (Side-by-Side so modal stays compact & clean) -->
+      <div class="flex items-center gap-3.5 py-1">
+        <div class="w-24 h-24 shrink-0 border-2 border-slate-900 p-2 grid grid-cols-5 gap-1 bg-slate-50">
+          <div class="bg-slate-900 col-span-2 row-span-2"></div>
+          <div class="bg-slate-900"></div>
+          <div class="bg-slate-900 col-span-2 row-span-2"></div>
+          <div class="bg-slate-900"></div>
+          <div class="bg-slate-900 col-span-3"></div>
+          <div class="bg-slate-900"></div>
+          <div class="bg-slate-900"></div>
+          <div class="bg-slate-900 col-span-2"></div>
+          <div class="bg-slate-900"></div>
+          <div class="bg-slate-900 col-span-2 row-span-2"></div>
+          <div class="bg-slate-900"></div>
+          <div class="bg-slate-900 col-span-2"></div>
+        </div>
+        <div class="text-xs space-y-1">
+          <div class="font-bold text-slate-900">Scan QRIS Instan</div>
+          <p class="text-[11px] text-slate-600 m-0 leading-snug">
+            Mendukung BCA, Mandiri, GoPay, OVO, DANA, ShopeePay. Nominal terisi otomatis.
+          </p>
+          <div class="text-[11px] font-mono-num text-slate-500">MDR 0,7% • Aktif 2 detik</div>
+        </div>
+      </div>
+
+      <!-- Sleek 1-Line Order Bump -->
+      <label id="qris-bump-wrapper" class="p-3 rounded-lg bg-amber-50 flex items-start gap-2 cursor-pointer text-xs">
+        <input id="qris-bump-checkbox" type="checkbox" class="mt-0.5" onchange="toggleOrderBump(this)" />
+        <div class="leading-snug">
+          <strong class="text-slate-900">+Rp 15.000:</strong> <span class="text-slate-700">Tambah Template Tracker Lamaran Kerja & Checklist Interview.</span>
+        </div>
+      </label>
+
+      <div class="flex items-center justify-between border-t border-slate-200 pt-3">
+        <div>
+          <div class="text-[11px] text-slate-500">Total Tagihan:</div>
+          <div id="qris-total-amount" class="text-base font-bold font-mono-num text-slate-900">Rp 29.000</div>
+        </div>
+        <button class="px-4 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs transition cursor-pointer border-0" onclick="simulateQrisPaymentSuccess()">
+          Simulasikan Lunas
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 2: COMPACT PREVIEW ISI TOOLKIT                                  -->
+  <!-- ===================================================================== -->
+  <div id="modal-toolkit-preview" class="modal-backdrop">
+    <div class="bg-white rounded-xl max-w-md w-full p-5 space-y-3.5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-2.5">
+        <div>
+          <h3 id="preview-modal-title" class="text-sm font-bold text-slate-900 m-0"></h3>
+          <div class="text-[11px] font-mono-num font-bold text-emerald-800 mt-0.5">Cuplikan Deliverable</div>
+        </div>
+        <button class="px-2.5 py-1 rounded bg-slate-100 text-slate-800 text-xs font-bold cursor-pointer border-0" onclick="closeModals()">✕</button>
+      </div>
+      <div id="preview-modal-subtitle" class="text-xs font-semibold text-slate-600"></div>
+      <div id="preview-modal-table" class="space-y-1"></div>
+      <div class="flex justify-end border-t border-slate-200 pt-2.5">
+        <button class="px-4 py-2 rounded-lg bg-slate-900 text-white text-xs font-semibold cursor-pointer border-0" onclick="closeModals()">Tutup Preview</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 3: SHAREABLE KARTU SKOR KESIAPAN KARIR (Growth Hack #2)         -->
+  <!-- ===================================================================== -->
+  <div id="modal-score-card" class="modal-backdrop">
+    <div class="bg-white rounded-xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex items-start justify-between gap-2 border-b border-slate-200 pb-2.5">
+        <div>
+          <h3 class="text-sm font-bold text-slate-900 m-0">Kartu Skor Kesiapan Karir</h3>
+          <div class="text-[11px] font-mono-num font-semibold text-emerald-800 mt-0.5">Shareable ke LinkedIn & Instagram Story</div>
+        </div>
+        <button class="px-2.5 py-1 rounded bg-slate-100 text-slate-800 text-xs font-bold cursor-pointer border-0 shrink-0" onclick="closeModals()">✕</button>
+      </div>
+
+      <!-- Visual Shareable Score Badge Area (Clean Divider Layout — Zero Nested Cards) -->
+      <div class="py-3 border-y border-slate-200 space-y-3">
+        <div class="flex items-center justify-between text-xs">
+          <span class="font-bold text-slate-900">= Test App Career Launchpad</span>
+          <span id="scorecard-badge-pill" class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-950 font-mono-num font-bold text-[11px]">VERIFIED READY</span>
+        </div>
+        <div class="py-2.5 border-y border-slate-100 flex items-baseline justify-between gap-2">
+          <div>
+            <div class="text-[11px] text-slate-500">Kandidat & Jalur Profesi</div>
+            <div class="text-sm font-bold text-slate-900 mt-0.5">Raka Pratama, S.Kom.</div>
+            <div id="scorecard-role-title" class="text-xs text-emerald-800 font-semibold">Junior IT GRC & Internal Audit</div>
+          </div>
+          <div class="text-right">
+            <div id="scorecard-metric-value" class="text-2xl font-bold font-mono-num text-emerald-800">89%</div>
+            <div id="scorecard-metric-label" class="text-[11px] text-slate-500">ATS & Case Ready</div>
+          </div>
+        </div>
+        <div class="text-[11px] text-slate-600 flex items-center justify-between">
+          <span>Divalidasi Praktisi IT GRC, Data & HR</span>
+          <span class="font-mono-num font-semibold text-slate-900">testapp.id/v/RAKA-89</span>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between gap-2 pt-1">
+        <button onclick="shareScoreCard('LinkedIn')" class="flex-1 py-2.5 px-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition cursor-pointer border-0">
+          Bagikan ke LinkedIn
+        </button>
+        <button onclick="shareScoreCard('Instagram Story')" class="flex-1 py-2.5 px-3 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-slate-950 text-xs font-bold transition cursor-pointer border-0">
+          Unduh Kartu IG Story
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 4: STYLED TAMBAH LAMARAN KERJA (Job Application Tracker)        -->
+  <!-- ===================================================================== -->
+  <div id="modal-add-application" class="modal-backdrop">
+    <div class="bg-white rounded-xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex items-start justify-between gap-2 border-b border-slate-200 pb-2.5">
+        <div>
+          <h3 class="text-sm font-bold text-slate-900 m-0">Tambah Lamaran Kerja Baru</h3>
+          <div class="text-[11px] text-slate-500 mt-0.5">Catat perusahaan tujuan &amp; jadwal tahapan seleksi Anda</div>
+        </div>
+        <button class="px-2.5 py-1 rounded bg-slate-100 text-slate-800 text-xs font-bold cursor-pointer border-0 shrink-0" onclick="closeModals()">✕</button>
+      </div>
+
+      <form onsubmit="submitNewApplication(event)" class="space-y-3 text-xs">
+        <div class="space-y-1">
+          <label for="input-app-company" class="font-bold text-slate-800 block">Nama Perusahaan</label>
+          <input id="input-app-company" type="text" required maxlength="80" placeholder="Contoh: PT Bank Mandiri Taspen" value="PT Bank Mandiri Taspen" class="w-full p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none" />
+        </div>
+
+        <div class="space-y-1">
+          <label for="input-app-role" class="font-bold text-slate-800 block">Posisi yang Dilamar</label>
+          <input id="input-app-role" type="text" required maxlength="80" placeholder="Contoh: Junior IT Governance & Audit" value="Junior IT Governance & Audit" class="w-full p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <div class="space-y-1">
+            <label for="input-app-track" class="font-bold text-slate-800 block">Jalur Karir</label>
+            <select id="input-app-track" class="w-full p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none">
+              <option value="IT GRC">IT GRC &amp; Audit</option>
+              <option value="Data Analyst">Data Analyst</option>
+              <option value="PMO / ITSM">PMO / ITSM</option>
+            </select>
+          </div>
+          <div class="space-y-1">
+            <label for="input-app-status" class="font-bold text-slate-800 block">Status Saat Ini</label>
+            <select id="input-app-status" class="w-full p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none">
+              <option value="applied">Applied (Terkirim)</option>
+              <option value="wishlist">Wishlist</option>
+              <option value="hr_interview">HR Interview</option>
+              <option value="user_interview">User Interview</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <label for="input-app-next" class="font-bold text-slate-800 block">Target / Persiapan Berikutnya</label>
+          <input id="input-app-next" type="text" maxlength="120" value="Latihan simulasi pertanyaan di modul Mock Interview" class="w-full p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none" />
+        </div>
+
+        <div class="flex items-center justify-end gap-2 border-t border-slate-200 pt-3">
+          <button type="button" onclick="closeModals()" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs transition cursor-pointer border-0">
+            Batal
+          </button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition cursor-pointer border-0">
+            Simpan ke Tracker
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/mock-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

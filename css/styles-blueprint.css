@@ -1,0 +1,444 @@
+/* ==========================================================================
+   TEST APP — Prototype Option 2: "Technical Minimalist" Blueprint Wireframe
+   Background: Paper (#F7F7F5) | Primary: Forest Green (#1A3C2B) | Grid: #3A3A38
+   Typography: Space Grotesk (Display) + General Sans (Body) + JetBrains Mono (Tech)
+   Constraints: 0px/2px Radius, Zero Box-Shadows, 1px Hairlines (#3A3A38 at 20%)
+   ========================================================================== */
+
+:root {
+  --bg-paper: #F7F7F5;
+  --surface-pure: #FFFFFF;
+  --brand-forest: #1A3C2B;
+  --brand-forest-muted: rgba(26, 60, 43, 0.2);
+  --grid-ink: #3A3A38;
+  --grid-hairline: rgba(58, 58, 56, 0.2);
+  --grid-hairline-strong: rgba(58, 58, 56, 0.35);
+  --accent-coral: #FF8C69;
+  --accent-mint: #9EFFBF;
+  --accent-gold: #F4D35E;
+}
+
+* {
+  box-sizing: border-box;
+  box-shadow: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--accent-mint);
+  color: var(--brand-forest);
+}
+
+:focus-visible {
+  outline: 1px solid var(--brand-forest);
+  outline-offset: 2px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-paper);
+  color: var(--grid-ink);
+  font-family: 'General Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  /* Mosaic Background: SVG mosaic of interlocking rectangular panels, 0.5px hairlines (#3A3A38 at 0.3 opacity), filled #F7F7F5 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Crect width='320' height='320' fill='%23F7F7F5'/%3E%3Cg fill='%23F7F7F5' stroke='%233A3A38' stroke-width='0.5' stroke-opacity='0.3'%3E%3Crect x='0' y='0' width='160' height='160'/%3E%3Crect x='160' y='0' width='160' height='64'/%3E%3Crect x='160' y='64' width='80' height='96'/%3E%3Crect x='240' y='64' width='80' height='96'/%3E%3Crect x='0' y='160' width='96' height='160'/%3E%3Crect x='96' y='160' width='224' height='64'/%3E%3Crect x='96' y='224' width='112' height='96'/%3E%3Crect x='208' y='224' width='112' height='96'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Typography System */
+h1, .font-hero-scale {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(4rem, 7vw, 6rem); /* 64px - 96px per Spec */
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--brand-forest);
+}
+
+h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--brand-forest);
+}
+
+h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--brand-forest);
+}
+
+.font-display-bp {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--brand-forest);
+}
+
+.font-mono-tech,
+.font-mono-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.tech-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem; /* 11px (within 10-12px spec) */
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Structural Hairlines & Containers (Ensure comfortable padding insets) */
+.hairline-t { border-top: 1px solid var(--grid-hairline); padding-top: 0.875rem; }
+.hairline-b { border-bottom: 1px solid var(--grid-hairline); padding-bottom: 0.875rem; }
+.hairline-l { border-left: 1px solid var(--grid-hairline); padding-left: 0.875rem; }
+.hairline-r { border-right: 1px solid var(--grid-hairline); padding-right: 0.875rem; }
+.hairline-box { border: 1px solid var(--grid-hairline); border-radius: 0; padding: 1.25rem; }
+
+/* Navigation & Dropdowns */
+.tech-navbar {
+  background-color: var(--bg-paper);
+  border-bottom: 1px solid var(--grid-hairline);
+  transition: background-color 140ms ease-out;
+}
+
+.nav-dropdown-wrapper,
+.user-account-wrapper {
+  position: relative;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  max-width: 94vw;
+  background: var(--bg-paper);
+  border: 1px solid var(--brand-forest);
+  border-radius: 0;
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 120ms linear, visibility 120ms linear;
+  z-index: 60;
+}
+
+.nav-dropdown-wrapper:hover .nav-dropdown-menu,
+.nav-dropdown-wrapper.open .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.submenu-item-bp {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--surface-pure);
+  border: 1px solid var(--grid-hairline);
+  border-radius: 0;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color 120ms ease-out, background-color 120ms ease-out;
+}
+
+.submenu-item-bp:hover {
+  border-color: var(--brand-forest);
+  background-color: var(--bg-paper);
+}
+
+.user-account-menu {
+  position: absolute;
+  top: calc(100% + 1px);
+  right: 0;
+  width: 300px;
+  max-width: 92vw;
+  background: var(--bg-paper);
+  border: 1px solid var(--brand-forest);
+  border-radius: 0;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 120ms linear, visibility 120ms linear;
+  z-index: 65;
+}
+
+.user-account-wrapper.open .user-account-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-nav-drawer {
+  display: none;
+  background: var(--bg-paper);
+  border-bottom: 1px solid var(--grid-hairline);
+  padding: 1rem;
+}
+
+.mobile-nav-drawer.open {
+  display: block;
+}
+
+/* Buttons (Flat 2D, 0px or 2px border-radius, zero shadows) */
+.btn-forest {
+  background-color: var(--brand-forest);
+  color: #FFFFFF;
+  border: 1px solid var(--brand-forest);
+  border-radius: 2px;
+  padding: 0.55rem 1.1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 120ms ease-out, color 120ms ease-out;
+}
+
+.btn-forest:hover {
+  background-color: #122A1E;
+}
+
+.btn-ghost-bp {
+  background-color: transparent;
+  color: var(--brand-forest);
+  border: 1px solid var(--grid-hairline-strong);
+  border-radius: 2px;
+  padding: 0.55rem 1.1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 120ms ease-out, background-color 120ms ease-out;
+}
+
+.btn-ghost-bp:hover {
+  border-color: var(--brand-forest);
+  background-color: var(--surface-pure);
+}
+
+/* Special Component: Status Badge */
+.status-badge-bp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--brand-forest-muted);
+  padding: 4px 12px;
+  border-radius: 0;
+  background-color: var(--bg-paper);
+}
+
+.status-dot-bp {
+  width: 8px;
+  height: 8px;
+  background-color: var(--brand-forest);
+  flex-shrink: 0;
+}
+
+/* Luminosity Blended Images / Visuals */
+.img-luminosity {
+  mix-blend-mode: luminosity;
+  opacity: 0.9;
+  filter: grayscale(100%) contrast(1.08);
+  transition: filter 200ms ease-out, opacity 200ms ease-out, mix-blend-mode 200ms ease-out;
+}
+
+.img-luminosity:hover {
+  mix-blend-mode: normal;
+  opacity: 1;
+  filter: grayscale(0%) contrast(1);
+}
+
+/* Special Component: Network Topology Orbit Animation (20s linear infinite) */
+@keyframes orbitRotate20s {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.orbit-ring-animated {
+  transform-origin: 200px 200px;
+  animation: orbitRotate20s 20s linear infinite;
+}
+
+/* Bento 2x2 Grid with 1px 'Grid' gap */
+.bento-grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background-color: var(--grid-hairline-strong);
+  border: 1px solid var(--grid-hairline-strong);
+}
+
+@media (min-width: 768px) {
+  .bento-grid-2x2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.bento-cell {
+  background-color: var(--bg-paper);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Colored Left-Border Accents for Bento Headers */
+.accent-border-coral { border-left: 3px solid var(--accent-coral); padding-left: 0.65rem; }
+.accent-border-mint  { border-left: 3px solid var(--accent-mint);  padding-left: 0.65rem; }
+.accent-border-gold  { border-left: 3px solid var(--accent-gold);  padding-left: 0.65rem; }
+.accent-border-forest { border-left: 3px solid var(--brand-forest); padding-left: 0.65rem; }
+
+/* Technical Form CTA with 4 L-shaped Corner Markers (10px x 10px in #1A3C2B) */
+.tech-cta-box {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+  background-color: var(--bg-paper);
+  border: 1px solid var(--grid-hairline);
+  padding: 2.25rem 1.75rem;
+}
+
+.corner-marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+
+.corner-tl { top: -1px; left: -1px; border-top: 2px solid var(--brand-forest); border-left: 2px solid var(--brand-forest); }
+.corner-tr { top: -1px; right: -1px; border-top: 2px solid var(--brand-forest); border-right: 2px solid var(--brand-forest); }
+.corner-bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--brand-forest); border-left: 2px solid var(--brand-forest); }
+.corner-br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--brand-forest); border-right: 2px solid var(--brand-forest); }
+
+/* Page Switching & Studio Pills */
+.page-view { display: none; }
+.page-view.active { display: block; }
+
+.motion-step-btn {
+  text-align: left;
+  padding: 0.75rem;
+  border: 1px solid var(--grid-hairline);
+  background: var(--bg-paper);
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 120ms linear, border-color 120ms linear;
+}
+
+.motion-step-btn.active {
+  background: var(--surface-pure);
+  border-color: var(--brand-forest);
+}
+
+.motion-bar-track {
+  height: 2px;
+  width: 100%;
+  background-color: var(--grid-hairline);
+  margin-top: 0.45rem;
+}
+
+.motion-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--brand-forest);
+}
+
+.motion-step-btn.active .motion-bar-fill {
+  width: 100%;
+  transition: width 2600ms linear;
+}
+
+.motion-curve-line {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 420;
+  transition: stroke-dashoffset 600ms ease-out, stroke 300ms linear;
+}
+
+.studio-pill-bar {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  background: var(--grid-hairline-strong);
+  border: 1px solid var(--grid-hairline-strong);
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.studio-pill-btn {
+  border: none;
+  background: var(--bg-paper);
+  color: var(--grid-ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.65rem 1rem;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+}
+
+.studio-pill-btn:hover { background: var(--surface-pure); }
+.studio-pill-btn.active {
+  background: var(--brand-forest);
+  color: #FFFFFF;
+}
+
+.studio-pane { display: none; }
+.studio-pane.active { display: block; }
+
+/* Blurred Teaser & Modals */
+.redacted-blur {
+  filter: blur(5px);
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.redacted-unlocked {
+  filter: blur(0);
+  user-select: auto;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(26, 60, 43, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 80;
+  padding: 1rem;
+}
+
+.modal-backdrop.open { display: flex; }
+
+/* Override dynamic JS rounded/slate classes inside Blueprint mode so 0px/2px wireframe rules hold */
+.blueprint-mode .rounded-full,
+.blueprint-mode .rounded-xl,
+.blueprint-mode .rounded-lg,
+.blueprint-mode .rounded {
+  border-radius: 2px !important;
+}
